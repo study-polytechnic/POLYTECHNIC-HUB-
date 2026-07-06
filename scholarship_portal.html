@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Polytechnic Hub Scholarship Portal - Find Government, AICTE, NSP, Bihar and Private Scholarships in one place.">
+    <meta name="theme-color" content="#0A192F">
+    <title>Scholarship Portal | Polytechnic Hub</title>
+    
+    <style>
+        /* ==========================================================================
+           CSS Variables & Premium Theming (Dark Blue + Black Default)
+           ========================================================================== */
+        :root {
+            --bg-color: #050B14;
+            --bg-gradient: linear-gradient(135deg, #0A192F 0%, #000000 100%);
+            --header-bg: rgba(4, 10, 20, 0.85); 
+            --card-bg: linear-gradient(145deg, rgba(27, 42, 65, 0.95) 0%, rgba(17, 34, 64, 0.85) 100%);
+            
+            --text-main: #FFFFFF;
+            --text-sec: #B8C5D6;
+            --primary: #00BFFF;
+            --primary-hover: #0099CC;
+            
+            --radius: 16px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8);
+            --card-shadow-hover: 0 25px 50px -10px rgba(0, 191, 255, 0.25);
+            --border-top: rgba(255, 255, 255, 0.1);
+            --border-left: rgba(255, 255, 255, 0.05);
+            --border-subtle: rgba(255, 255, 255, 0.05);
+        }
+
+        body.light-mode {
+            --bg-color: #FFFFFF;
+            --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+            --header-bg: rgba(248, 250, 252, 0.85);
+            --card-bg: linear-gradient(145deg, #FFFFFF 0%, #F1F5F9 100%);
+            
+            --text-main: #111827;
+            --text-sec: #6B7280;
+            --primary: #1565C0;
+            --primary-hover: #0D47A1;
+            
+            --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1);
+            --card-shadow-hover: 0 25px 50px -10px rgba(21, 101, 192, 0.3);
+            --border-top: #FFFFFF;
+            --border-left: rgba(255, 255, 255, 0.8);
+            --border-subtle: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ==========================================================================
+           Base & Reset
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-gradient);
+            background-color: var(--bg-color);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            background-color: var(--primary); color: #FFFFFF;
+            padding: 12px 24px; border-radius: 8px; /* Slightly sharper for portal */
+            font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer;
+            transition: all 0.2s ease; gap: 8px; text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: #FFFFFF;
+        }
+
+        /* ==========================================================================
+           Header & Nav (Matched with Index)
+           ========================================================================== */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--header-bg); backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-subtle);
+            transition: background var(--transition);
+        }
+
+        .nav-container {
+            display: flex; justify-content: space-between; align-items: center; height: 76px;
+        }
+
+        .nav-left, .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+        .back-link {
+            display: flex; align-items: center; gap: 6px;
+            color: var(--text-sec); font-weight: 600; font-size: 0.95rem;
+            transition: color var(--transition); margin-right: 10px;
+        }
+        .back-link:hover { color: var(--primary); }
+        .back-link svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .logo-group {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 1.2rem;
+        }
+
+        .logo-img { width: 40px; height: 40px; object-fit: contain; }
+
+        .icon-btn {
+            background: none; border: none; color: var(--text-main);
+            cursor: pointer; padding: 8px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .icon-btn:hover { background: rgba(128, 128, 128, 0.15); transform: scale(1.05); }
+        .icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* ==========================================================================
+           Hero / Portal Controls
+           ========================================================================== */
+        .portal-hero {
+            padding: 120px 0 40px;
+            text-align: center;
+        }
+
+        .portal-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800;
+            margin-bottom: 1rem; line-height: 1.1;
+        }
+
+        .portal-hero p {
+            color: var(--text-sec); font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 2.5rem; max-width: 800px; margin-inline: auto;
+        }
+
+        /* Search & Sort Controls */
+        .controls-wrapper {
+            display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
+            margin-bottom: 2rem; max-width: 900px; margin-inline: auto;
+        }
+
+        .search-box {
+            position: relative; flex-grow: 1; min-width: 280px; max-width: 500px;
+        }
+
+        .search-box input {
+            width: 100%; padding: 14px 20px 14px 45px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius); color: var(--text-main); font-size: 1rem;
+            outline: none; transition: border-color var(--transition), background var(--transition);
+        }
+        body.light-mode .search-box input { background: #FFFFFF; }
+
+        .search-box input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
+        body.light-mode .search-box input:focus { background: #F8FAFC; }
+
+        .search-box svg {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            width: 20px; height: 20px; fill: var(--text-sec);
+        }
+
+        .sort-select {
+            padding: 14px 20px; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle); border-radius: var(--radius);
+            color: var(--text-main); font-size: 1rem; outline: none; cursor: pointer;
+        }
+        body.light-mode .sort-select { background: #FFFFFF; }
+
+        /* Filter Chips */
+        .filters {
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+            color: var(--text-sec); padding: 8px 16px; border-radius: 30px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        body.light-mode .filter-btn { background: #FFFFFF; }
+
+        .filter-btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
+        
+        .filter-btn.active {
+            background: var(--primary); color: #FFFFFF; border-color: var(--primary);
+        }
+
+        /* ==========================================================================
+           Scholarship Grid & Cards
+           ========================================================================== */
+        .scholarship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            padding-bottom: 6rem;
+        }
+
+        .scholarship-card {
+            background: var(--card-bg); border-radius: var(--radius);
+            padding: 2rem; display: flex; flex-direction: column;
+            box-shadow: var(--card-shadow);
+            border-top: 1px solid var(--border-top); border-left: 1px solid var(--border-left);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d; transform: perspective(1000px);
+            transition: box-shadow var(--transition), border-color var(--transition);
+            will-change: transform;
+        }
+
+        .scholarship-card:hover {
+            box-shadow: var(--card-shadow-hover); border-color: rgba(0, 191, 255, 0.4); z-index: 2;
+        }
+
+        .card-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 1.5rem; transform: translateZ(20px);
+        }
+
+        .card-icon {
+            width: 56px; height: 56px; border-radius: 12px;
+            background: rgba(0, 191, 255, 0.1); color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .card-icon svg { width: 32px; height: 32px; fill: currentColor; }
+
+        .card-badge {
+            background: rgba(255, 255, 255, 0.1); color: var(--text-sec);
+            padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        body.light-mode .card-badge { background: rgba(0, 0, 0, 0.05); }
+
+        .card-body { flex-grow: 1; transform: translateZ(25px); }
+
+        .card-title {
+            font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.3;
+        }
+
+        .card-desc {
+            color: var(--text-sec); font-size: 0.95rem; margin-bottom: 1.5rem;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        .card-info-grid {
+            display: grid; grid-template-columns: 1fr; gap: 0.8rem; margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.03); padding: 1rem; border-radius: 8px;
+        }
+        body.light-mode .card-info-grid { background: rgba(0, 0, 0, 0.02); }
+
+        .info-row { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; }
+        .info-row svg { width: 18px; height: 18px; fill: var(--primary); flex-shrink: 0; margin-top: 2px;}
+        .info-label { color: var(--text-sec); font-weight: 600; margin-right: 4px; }
+        .info-value { color: var(--text-main); font-weight: 500; }
+
+        .card-footer {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            transform: translateZ(30px); margin-top: auto;
+        }
+
+        .no-results {
+            grid-column: 1 / -1; text-align: center; padding: 4rem 0;
+            color: var(--text-sec); font-size: 1.2rem;
+        }
+
+        /* ==========================================================================
+           Footer (Copied exactly from index request)
+           ========================================================================== */
+        footer {
+            background: var(--header-bg); padding: 5rem 0 2rem;
+            border-top: 1px solid var(--border-subtle); backdrop-filter: blur(16px);
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem; margin-bottom: 4rem;
+        }
+        .footer-brand .logo-img { width: 70px; height: 70px; object-fit: contain; margin-bottom: 1.5rem; }
+        .footer-brand p { color: var(--text-sec); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .footer-col h4 { font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--text-main); font-weight: 700; }
+        .footer-col a, .footer-col p { color: var(--text-sec); margin-bottom: 1rem; display: block; font-size: 0.95rem; transition: color var(--transition); }
+        .footer-col a:hover { color: var(--primary); }
+        .map-link { display: inline-flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+        .map-link svg { flex-shrink: 0; margin-top: 3px; }
+        .social-links { display: flex; gap: 16px; margin-top: 1rem; }
+        .social-link {
+            width: 44px; height: 44px; border-radius: 50%; background: var(--border-subtle);
+            display: flex; align-items: center; justify-content: center; color: var(--text-main);
+            transition: background var(--transition), transform var(--transition);
+        }
+        .social-link:hover { background: var(--primary); color: #FFFFFF; transform: translateY(-4px); }
+        .social-link svg { width: 20px; height: 20px; fill: currentColor; }
+        .whatsapp-btn {
+            background-color: #25D366; color: #FFFFFF !important; display: inline-flex; align-items: center;
+            padding: 12px 24px; border-radius: var(--radius); font-weight: 600; gap: 10px; margin-top: 10px;
+        }
+        .whatsapp-btn:hover { background-color: #128C7E; color: #FFFFFF !important; transform: translateY(-2px); }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-subtle); color: var(--text-sec); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .card-footer { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container nav-container">
+            <div class="nav-left">
+                <!-- Hamburger (decorative placeholder based on index structure) -->
+                <button class="icon-btn" aria-label="Open Menu">
+                    <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                </button>
+                <a href="index.html" class="back-link">
+                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    Back
+                </a>
+                <a href="index.html" class="logo-group">
+                    <img src="logo.png" alt="Polytechnic Hub Logo" class="logo-img" onerror="this.style.display='none'">
+                    <span style="display: none; @media(min-width: 600px){display:inline;}">Polytechnic Hub</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode">
+                    <svg id="themeIcon" viewBox="0 0 24 24"></svg> <!-- Injected via JS -->
+                </button>
+                <button class="icon-btn" aria-label="Profile Account">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="container portal-hero">
+            <h1>Scholarship Portal</h1>
+            <p>Find Government, AICTE, NSP, Bihar and Private Scholarships in one place. Apply directly to secure your future.</p>
+            
+            <div class="controls-wrapper">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="text" id="searchInput" placeholder="Search by scholarship name or category...">
+                </div>
+                <select class="sort-select" id="sortSelect">
+                    <option value="latest">Sort: Latest</option>
+                    <option value="az">Sort: A-Z</option>
+                </select>
+            </div>
+
+            <div class="filters" id="filterContainer">
+                <!-- Buttons rendered via JS -->
+            </div>
+        </section>
+
+        <!-- Scholarship Grid -->
+        <section class="container">
+            <div class="scholarship-grid" id="scholarshipGrid">
+                <!-- Cards rendered via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col footer-brand">
+                <img src="logo.png" alt="Polytechnic Hub Logo" class="logo-img" loading="lazy" onerror="this.style.display='none'">
+                <p>Empowering polytechnic students with top-tier free study materials, expert courses, and the latest updates.</p>
+                <a href="https://maps.app.goo.gl/UuHgWaFdJS8n6qV48?g_st=ac" target="_blank" rel="noopener noreferrer" class="map-link">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>LK STUDY STUDIO MERHA BANKA BIHAR</span>
+                </a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>Phone: <br><a href="tel:+919296783086" style="color: var(--primary); font-weight:600;">+91 9296783086</a></p>
+                <p>Email: <br><a href="mailto:lkstudiokatoriya@gmail.com" style="color: var(--primary); font-weight:600;">lkstudiokatoriya@gmail.com</a></p>
+                <a href="https://whatsapp.com/channel/0029VbBxDxX29759o9fc0B03" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12.031 21.411H12c-1.637 0-3.238-.429-4.66-1.243l-5.176 1.357 1.387-5.045C2.651 15.016 2.186 13.313 2.186 11.6c0-5.412 4.408-9.82 9.845-9.82 2.623 0 5.088 1.021 6.942 2.877 1.854 1.855 2.876 4.318 2.876 6.943 0 5.412-4.408 9.811-9.818 9.811zm-4.912-3.13c.277.164 1.58.942 3.013 1.178 1.48.243 3.067.065 4.364-.532 1.339-.616 2.457-1.705 3.068-3.045.54-1.182.721-2.571.503-3.92-.254-1.57-1.124-2.883-2.316-3.791-1.272-.969-2.834-1.405-4.437-1.238-1.554.161-2.946.852-4.004 1.942-1.042 1.074-1.666 2.441-1.782 4.02-.123 1.666.366 3.28 1.332 4.545.895 1.171 2.164 1.996 3.593 2.37l.666-1.529zM16.94 13.911c-.266-.134-1.576-.778-1.821-.868-.244-.09-.422-.134-.599.134-.178.267-.688.868-.844 1.046-.155.178-.31.201-.577.068-.266-.134-1.126-.415-2.145-1.321-.792-.705-1.326-1.576-1.482-1.844-.155-.267-.017-.411.116-.545.12-.12.266-.312.4-.467.133-.156.178-.267.266-.445.089-.178.045-.334-.022-.468-.067-.134-.6-1.446-.822-1.98-.216-.52-.435-.449-.599-.457-.156-.008-.334-.009-.511-.009-.178 0-.466.067-.711.334-.244.267-.933.912-.933 2.225 0 1.313.955 2.581 1.088 2.76.133.178 1.882 2.871 4.558 4.025.637.275 1.134.439 1.522.562.639.203 1.222.174 1.682.106.516-.077 1.576-.644 1.799-1.268.222-.623.222-1.157.155-1.268-.066-.111-.244-.178-.511-.312z"/></svg>
+                    Join WhatsApp Channel
+                </a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal & Social</h4>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+                <div class="social-links">
+                    <a href="https://youtube.com/@polytechnic_hub?si=8USwzlduGp-12RJL" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-link">
+                        <svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.636 2.636 0 0 0-1.85-1.874C18.1 3.86 12 3.86 12 3.86s-6.1 0-7.732.452a2.636 2.636 0 0 0-1.85 1.874C1.96 7.842 1.96 12 1.96 12s0 4.158.458 5.814a2.636 2.636 0 0 0 1.85 1.874C5.9 20.14 12 20.14 12 20.14s6.1 0 7.732-.452a2.636 2.636 0 0 0 1.85-1.874c.458-1.656.458-5.814.458-5.814s0-4.158-.458-5.814zm-11.61 8.87V8.943l5.525 3.056-5.525 3.057z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/lk_lalan_bhai?igsh=Nnk3cXFpbDF1cDJs" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+                        <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.757 5.757 0 0 1 22 7.75v8.5A5.757 5.757 0 0 1 16.25 22h-8.5A5.757 5.757 0 0 1 2 16.25v-8.5A5.757 5.757 0 0 1 7.75 2zm0 1.5A4.255 4.255 0 0 0 3.5 7.75v8.5A4.255 4.255 0 0 0 7.75 20.5h8.5a4.255 4.255 0 0 0 4.25-4.25v-8.5A4.255 4.255 0 0 0 16.25 3.5h-8.5zM12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.25-3.25a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Polytechnic Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         JavaScript Logic (Data, Rendering, Filtering)
+         ========================================================================== -->
+    <script>
+        // --- 1. FUTURE-READY SCHOLARSHIP DATA ---
+        // To add a new scholarship, simply add a new object to this array.
+        const scholarshipsData = [
+            { id: 1, name: "National Scholarship Portal (NSP)", category: "Central Government", website: "https://scholarships.gov.in/", desc: "One-stop portal for all Central Government, State Government, and AICTE scholarships.", eligibility: "Merit & Means based for Minorities, SC/ST/OBC.", amount: "Varies by scheme", lastDate: "Check Official Website" },
+            { id: 2, name: "Bihar Post Matric Scholarship", category: "Bihar Government", website: "https://pmsonline.bih.nic.in/", desc: "Financial assistance to SC, ST, BC, and EBC students of Bihar studying at post-matriculation level.", eligibility: "Resident of Bihar, specific income limits.", amount: "Fee reimbursement & Maintenance", lastDate: "Check Official Website" },
+            { id: 3, name: "Bihar Student Credit Card", category: "Bihar Government", website: "https://www.7nishchay-yuvaupmission.bihar.gov.in/", desc: "Provides educational loan of up to Rs. 4 Lakhs to 12th pass students going for higher education.", eligibility: "12th Pass, Resident of Bihar.", amount: "Up to ₹4 Lakhs", lastDate: "Check Official Website" },
+            { id: 4, name: "AICTE Pragati Scholarship", category: "AICTE", website: "https://www.aicte-india.org/schemes/students-development-schemes", desc: "Empowering young girls by providing financial support for technical education.", eligibility: "Girl students admitted to AICTE approved diploma/degree.", amount: "₹50,000 per annum", lastDate: "Check Official Website" },
+            { id: 5, name: "AICTE Saksham Scholarship", category: "AICTE", website: "https://www.aicte-india.org/schemes/students-development-schemes", desc: "Support for specially-abled students to pursue technical education.", eligibility: "Differently-abled students (min 40% disability).", amount: "₹50,000 per annum", lastDate: "Check Official Website" },
+            { id: 6, name: "AICTE Swanath Scholarship", category: "AICTE", website: "https://www.aicte-india.org/schemes/students-development-schemes", desc: "Scholarship for orphans, wards of parents who died due to Covid-19, or Armed Forces martyrs.", eligibility: "Specific distressing criteria as mentioned.", amount: "₹50,000 per annum", lastDate: "Check Official Website" },
+            { id: 7, name: "Central Sector Scholarship", category: "Central Government", website: "https://scholarships.gov.in/", desc: "Scholarship for college and university students by the Department of Higher Education.", eligibility: "Above 80th percentile in relevant board.", amount: "₹12,000 - ₹20,000 per annum", lastDate: "Check Official Website" },
+            { id: 8, name: "PM YASASVI Scholarship", category: "Central Government", website: "https://yet.nta.ac.in/", desc: "PM Young Achievers Scholarship Award Scheme for Vibrant India for OBC, EBC and DNT.", eligibility: "Class 9 & 11 students belonging to OBC/EBC/DNT.", amount: "Up to ₹1,25,000 p.a.", lastDate: "Check Official Website" },
+            { id: 9, name: "UGC Scholarship", category: "UGC", website: "https://www.ugc.gov.in/", desc: "Various scholarships offered by the University Grants Commission for higher studies.", eligibility: "Varies depending on specific UGC scheme.", amount: "Varies by scheme", lastDate: "Check Official Website" },
+            { id: 10, name: "ONGC Scholarship", category: "Private", website: "https://ongcscholar.org/", desc: "ONGC Foundation offers scholarships for meritorious SC/ST, OBC, and General students.", eligibility: "Pursuing Engineering/MBBS/MBA/Geology.", amount: "₹48,000 per annum", lastDate: "Check Official Website" },
+            { id: 11, name: "LIC Golden Jubilee Scholarship", category: "Private", website: "https://licindia.in/", desc: "For economically weaker families to pursue higher education in India.", eligibility: "Passed Class 12/Diploma with 60% marks.", amount: "₹10,000 - ₹20,000 p.a.", lastDate: "Check Official Website" },
+            { id: 12, name: "Tata Capital Pankh Scholarship", category: "Private", website: "https://www.buddy4study.com/", desc: "Support for students from low-income families to continue their higher studies.", eligibility: "Class 11, 12, Diploma, Undergraduates.", amount: "Up to 80% of tuition fees", lastDate: "Check Official Website" },
+            { id: 13, name: "Sitaram Jindal Scholarship", category: "Private", website: "https://www.sjfoundation.org/", desc: "A merit-cum-means scholarship for poor students across India.", eligibility: "Class 11 to PG, ITI, Diploma students.", amount: "₹500 - ₹2500 per month", lastDate: "Check Official Website" },
+            { id: 14, name: "HDFC Bank Parivartan Scholarship", category: "Private", website: "https://www.buddy4study.com/", desc: "ECSS programme for students facing personal/economic crisis.", eligibility: "Class 6 to PG, Diploma students.", amount: "Up to ₹75,000", lastDate: "Check Official Website" },
+            { id: 15, name: "Reliance Foundation Scholarship", category: "Private", website: "https://scholarships.reliancefoundation.org/", desc: "Support for outstanding UG and PG students across India.", eligibility: "1st year UG or PG students based on aptitude test.", amount: "Up to ₹2,00,000 over degree", lastDate: "Check Official Website" },
+            { id: 16, name: "Kotak Kanya Scholarship", category: "Private", website: "https://www.buddy4study.com/", desc: "Financial aid for meritorious girl students from underprivileged backgrounds.", eligibility: "Girl students passing class 12, pursuing professional grad.", amount: "Up to ₹1.5 Lakh per year", lastDate: "Check Official Website" },
+            { id: 17, name: "Aditya Birla Scholarship", category: "Private", website: "https://www.adityabirlascholars.net/", desc: "For students of premier institutes like IITs, BITS, IIMs, and Law colleges.", eligibility: "Top students from select premier institutions.", amount: "Up to ₹1,75,000 per annum", lastDate: "Check Official Website" },
+            { id: 18, name: "Foundation For Excellence Scholarship", category: "Private", website: "https://ffe.org/", desc: "Financial assistance for exceptionally bright students with financial constraints.", eligibility: "1st year Engineering (B.E./B.Tech) or MBBS students.", amount: "₹40,000 - ₹50,000 per annum", lastDate: "Check Official Website" },
+            { id: 19, name: "Vidyasaarathi Scholarship", category: "Private", website: "https://www.vidyasaarathi.co.in/", desc: "Technology-driven portal linking fund providers with education seekers.", eligibility: "Varies based on specific corporate schemes.", amount: "Varies", lastDate: "Check Official Website" },
+            { id: 20, name: "Buddy4Study Scholarship Portal", category: "Scholarship Portal", website: "https://www.buddy4study.com/", desc: "India's largest scholarship matching platform listing hundreds of private scholarships.", eligibility: "Open to all students to find suitable matches.", amount: "Varies", lastDate: "Check Official Website" }
+        ];
+
+        const filters = ["All Scholarships", "Central Government", "State Government", "AICTE", "Bihar", "Private", "Scholarship Portal"];
+        
+        let currentFilter = "All Scholarships";
+        let searchQuery = "";
+        let currentSort = "latest"; // 'latest' or 'az'
+
+        // --- 2. DOM ELEMENTS ---
+        const grid = document.getElementById('scholarshipGrid');
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const filterContainer = document.getElementById('filterContainer');
+
+        // SVG Icons for different categories
+        const getIconForCategory = (category) => {
+            if (category.includes('Government') || category.includes('Bihar')) {
+                return `<svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>`;
+            } else if (category === 'AICTE' || category === 'UGC') {
+                return `<svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zM21 11v6l-9 5-9-5v-6l9 5 9-5z"/></svg>`;
+            } else if (category.includes('Portal')) {
+                return `<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>`;
+            }
+            // Private Default
+            return `<svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>`;
+        };
+
+        // --- 3. RENDER LOGIC ---
+        function renderFilters() {
+            filterContainer.innerHTML = '';
+            filters.forEach(filter => {
+                const btn = document.createElement('button');
+                btn.className = `filter-btn ${currentFilter === filter ? 'active' : ''}`;
+                btn.innerText = filter;
+                btn.onclick = () => {
+                    currentFilter = filter;
+                    renderFilters(); // Update active class
+                    renderGrid();
+                };
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function renderGrid() {
+            grid.innerHTML = '';
+            
+            // 1. Filter Data
+            let filteredData = scholarshipsData.filter(item => {
+                // Category Filter Logic (Mapping "State Government" & "Bihar" correctly)
+                let categoryMatch = false;
+                if (currentFilter === "All Scholarships") categoryMatch = true;
+                else if (currentFilter === "State Government" && item.category === "Bihar Government") categoryMatch = true;
+                else if (currentFilter === "Bihar" && item.category === "Bihar Government") categoryMatch = true;
+                else if (item.category === currentFilter) categoryMatch = true;
+
+                // Search Filter Logic
+                let searchMatch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                  item.category.toLowerCase().includes(searchQuery.toLowerCase());
+                
+                return categoryMatch && searchMatch;
+            });
+
+            // 2. Sort Data
+            if (currentSort === 'az') {
+                filteredData.sort((a, b) => a.name.localeCompare(b.name));
+            } else {
+                // "Latest" - assuming original array order is latest/curated order
+                filteredData.sort((a, b) => a.id - b.id);
+            }
+
+            // 3. Render HTML
+            if (filteredData.length === 0) {
+                grid.innerHTML = `<div class="no-results">No scholarships found matching your criteria.</div>`;
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const iconSVG = getIconForCategory(item.category);
+                
+                const card = document.createElement('article');
+                card.className = 'scholarship-card js-tilt';
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-icon">${iconSVG}</div>
+                        <span class="card-badge">${item.category}</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${item.name}</h3>
+                        <p class="card-desc">${item.desc}</p>
+                        
+                        <div class="card-info-grid">
+                            <div class="info-row">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <div><span class="info-label">Eligibility:</span> <span class="info-value">${item.eligibility}</span></div>
+                            </div>
+                            <div class="info-row">
+                                <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                                <div><span class="info-label">Amount:</span> <span class="info-value">${item.amount}</span></div>
+                            </div>
+                            <div class="info-row">
+                                <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+                                <div><span class="info-label">Last Date:</span> <span class="info-value">${item.lastDate}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="${item.website}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Official Website</a>
+                        <a href="${item.website}" target="_blank" rel="noopener noreferrer" class="btn">Apply Now</a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            applyTiltEffect(); // Re-apply JS hover to new elements
+        }
+
+        // --- 4. EVENT LISTENERS ---
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderGrid();
+        });
+
+        sortSelect.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            renderGrid();
+        });
+
+        // --- 5. THEME TOGGLE LOGIC ---
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const moonPath = "M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z";
+        const sunPath = "M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z";
+
+        function applyTheme() {
+            const isLight = localStorage.getItem('theme') === 'light';
+            if (isLight) document.body.classList.add('light-mode');
+            else document.body.classList.remove('light-mode');
+            themeIcon.innerHTML = `<path d="${isLight ? moonPath : sunPath}"/>`;
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'dark' : 'light');
+            applyTheme();
+        });
+
+        // --- 6. UTILITIES (3D Tilt Effect) ---
+        function applyTiltEffect() {
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const tiltCards = document.querySelectorAll('.js-tilt');
+                tiltCards.forEach(card => {
+                    const newCard = card.cloneNode(true); // Remove old listeners if re-rendered
+                    card.parentNode.replaceChild(newCard, card);
+                    
+                    newCard.addEventListener('mousemove', (e) => {
+                        const rect = newCard.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = ((y - centerY) / centerY) * -5; // Subtle for larger cards
+                        const rotateY = ((x - centerX) / centerX) * 5;
+                        newCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+                    });
+
+                    newCard.addEventListener('mouseleave', () => {
+                        newCard.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+                    });
+                });
+            }
+        }
+
+        // --- 7. INITIALIZE ---
+        applyTheme();
+        renderFilters();
+        renderGrid();
+
+    </script>
+</body>
+</html>
