@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBTE Bihar - Electrical Circuit & Network (200 MCQs with Interactive Solutions)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+  
+  body {
+    background-color: #111;
+    color: white;
+    font-family: 'Kalam', cursive;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .smart-board {
+    background-color: #000000;
+    border: 12px solid #333;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1000px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.9), inset 0px 0px 50px rgba(255,255,255,0.05);
+  }
+
+  .header-scene {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px dashed #555;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 2.2rem;
+    margin: 10px 20px;
+  }
+
+  h2 {
+    color: #ff9800;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    margin-top: 40px;
+  }
+
+  q {
+    display: block;
+    color: #ffff00; /* Yellow */
+    font-size: 1.3rem;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-left: 20px;
+    color: #ffffff;
+    font-size: 1.15rem;
+    margin-top: 5px;
+  }
+
+  @media (max-width: 600px) {
+    .options-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  a {
+    display: block;
+    color: #00ff00; /* Green */
+    font-size: 1.2rem;
+    margin: 10px 0 5px 20px;
+    font-weight: bold;
+  }
+
+  /* Chalk-style Solution Button and Box */
+  .sol-btn {
+    background: transparent;
+    border: 1px dashed #00ffff;
+    color: #00ffff;
+    padding: 5px 15px;
+    font-family: 'Kalam', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 5px 0 10px 20px;
+    display: inline-block;
+    transition: 0.2s;
+  }
+
+  .sol-btn:hover {
+    background: rgba(0, 255, 255, 0.15);
+  }
+
+  .sol-box {
+    display: none; /* Initially Hidden */
+    background: #111;
+    border: 1px dashed #ff9800;
+    border-left: 5px solid #ff9800;
+    padding: 10px 15px;
+    margin: 5px 0 20px 20px;
+    color: #ff9800; /* Orange color for handwritten chalk feel */
+    font-size: 1.1rem;
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+
+  .ai-btn {
+    background: transparent;
+    border: 1px dashed #e040fb;
+    color: #e040fb;
+    padding: 5px 15px;
+    font-family: 'Kalam', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 5px 0 10px 10px;
+    display: inline-block;
+    transition: 0.2s;
+  }
+
+  .ai-btn:hover {
+    background: rgba(224, 64, 251, 0.15);
+  }
+
+  .ai-box {
+    display: none;
+    background: #1a001a;
+    border: 1px dashed #e040fb;
+    border-left: 5px solid #e040fb;
+    padding: 10px 15px;
+    margin: 5px 0 20px 20px;
+    color: #e040fb;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+
+  #ai-chat-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #e040fb;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-family: 'Kalam', cursive;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(224, 64, 251, 0.4);
+    z-index: 1000;
+    transition: transform 0.2s;
+  }
+
+  #ai-chat-fab:hover {
+    transform: scale(1.05);
+  }
+
+  #ai-chat-widget {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    max-width: 90vw;
+    height: 450px;
+    background: #000;
+    border: 3px solid #333;
+    border-radius: 12px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    z-index: 1000;
+    font-family: 'Kalam', cursive;
+    overflow: hidden;
+  }
+
+  #ai-chat-header {
+    background: #222;
+    color: #e040fb;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px dashed #444;
+  }
+
+  #ai-chat-header span.close-icon {
+    cursor: pointer;
+    color: #aaa;
+  }
+
+  #ai-chat-header span.close-icon:hover {
+    color: white;
+  }
+
+  #ai-chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chat-msg {
+    max-width: 85%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .chat-msg.user {
+    align-self: flex-end;
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+  }
+
+  .chat-msg.ai {
+    align-self: flex-start;
+    background: #1a001a;
+    color: #e040fb;
+    border: 1px dashed #e040fb;
+  }
+
+  #ai-chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 2px dashed #444;
+    background: #111;
+  }
+
+  #ai-chat-input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid #555;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Kalam', cursive;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  #ai-chat-input:focus {
+    border-color: #e040fb;
+  }
+
+  #ai-chat-send {
+    background: #e040fb;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-left: 5px;
+    border-radius: 4px;
+    font-family: 'Kalam', cursive;
+    cursor: pointer;
+  }
+
+  svg {
+    display: block;
+    margin: 10px 0 10px 20px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="smart-board">
+  
+  <div class="header-scene">
+    <!-- Teacher & Students SVG -->
+    <svg width="120" height="100" viewBox="0 0 120 100" fill="none" stroke="white" stroke-width="2">
+      <!-- Teacher -->
+      <circle cx="30" cy="30" r="10"/>
+      <path d="M30,40 L30,70 M30,50 L55,40 M30,50 L15,60 M30,70 L20,95 M30,70 L40,95"/>
+      <!-- Stick pointer -->
+      <line x1="55" y1="40" x2="80" y2="25" stroke="yellow" stroke-width="3"/>
+      <!-- Students -->
+      <circle cx="80" cy="80" r="8"/> <path d="M72,100 C72,90 88,90 88,100"/>
+      <circle cx="105" cy="80" r="8"/> <path d="M97,100 C97,90 113,90 113,100"/>
+    </svg>
+    <h1>SBTE Electrical Circuit & Network - 200 MCQs</h1>
+  </div>
+
+  <!-- CHAPTER 1 -->
+  <h2>1. DC Network Fundamentals</h2>
+  
+  <q>1. What is the fundamental unit of electrical current?</q>
+  <div class="options-grid"><span>A) Volt</span><span>B) Ampere</span><span>C) Coulomb</span><span>D) Ohm</span></div>
+  <a>Ans: B) Ampere</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The fundamental unit of electrical current is the Ampere. Volt is the unit of voltage, Coulomb is the unit of charge, and Ohm is the unit of resistance.</div>
+
+  <q>2. Ohm's law is applicable to:</q>
+  <div class="options-grid"><span>A) Semiconductors</span><span>B) Vacuum tubes</span><span>C) Electrolytes</span><span>D) Linear resistors</span></div>
+  <a>Ans: D) Linear resistors</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Ohm's law is only applicable to linear and bilateral networks. Semiconductors and vacuum tubes are non-linear devices, so Ohm's law does not apply to them.</div>
+
+  <q>3. Kirchhoff’s Current Law (KCL) is based on the conservation of:</q>
+  <div class="options-grid"><span>A) Energy</span><span>B) Momentum</span><span>C) Charge</span><span>D) Mass</span></div>
+  <a>Ans: C) Charge</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">KCL states that the total current entering a node is equal to the total current leaving it. This is a direct consequence of the conservation of electric charge.</div>
+
+  <q>4. Kirchhoff’s Voltage Law (KVL) is based on the conservation of:</q>
+  <div class="options-grid"><span>A) Charge</span><span>B) Energy</span><span>C) Power</span><span>D) Flux</span></div>
+  <a>Ans: B) Energy</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">KVL states that the algebraic sum of all voltages around any closed loop is zero, which is based on the law of conservation of energy.</div>
+
+  <q>5. The unit of electrical power is:</q>
+  <div class="options-grid"><span>A) Joule</span><span>B) Watt</span><span>C) Volt-Ampere Reactive</span><span>D) Coulomb/sec</span></div>
+  <a>Ans: B) Watt</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Power = Work Done / Time = Joules / second, which is defined as Watt. Joule is the unit of energy, and VAR is the unit of reactive power.</div>
+
+  <q>6. Conductance is the reciprocal of:</q>
+  <div class="options-grid"><span>A) Capacitance</span><span>B) Inductance</span><span>C) Resistance</span><span>D) Impedance</span></div>
+  <a>Ans: C) Resistance</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Conductance (G) represents the ease with which current flows and is the mathematical reciprocal of resistance (R). Thus, G = 1/R.</div>
+
+  <q>7. The unit of conductance is:</q>
+  <div class="options-grid"><span>A) Ohm</span><span>B) Siemens (Mho)</span><span>C) Farad</span><span>D) Henry</span></div>
+  <a>Ans: B) Siemens (Mho)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Since the unit of resistance is Ohm, its reciprocal, conductance, has the unit Siemens or Mho. Farad is the unit of capacitance, and Henry is the unit of inductance.</div>
+
+  <q>8. If two resistors of 10Ω and 10Ω are connected in parallel, the equivalent resistance is:</q>
+  <div class="options-grid"><span>A) 20Ω</span><span>B) 5Ω</span><span>C) 100Ω</span><span>D) 10Ω</span></div>
+  <a>Ans: B) 5Ω</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Parallel combination formula: Req = (R1 * R2) / (R1 + R2) = (10 * 10) / (10 + 10) = 100 / 20 = 5Ω. When two identical resistors are in parallel, the equivalent value is halved!</div>
+
+  <q>9. If three resistors of 5Ω are in series, the total resistance is:</q>
+  <div class="options-grid"><span>A) 1.67Ω</span><span>B) 5Ω</span><span>C) 15Ω</span><span>D) 10Ω</span></div>
+  <a>Ans: C) 15Ω</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a series combination, the resistances are added directly: Req = R1 + R2 + R3 = 5 + 5 + 5 = 15Ω.</div>
+
+  <q>10. Ideal voltage source has an internal resistance of:</q>
+  <div class="options-grid"><span>A) Infinity</span><span>B) Zero</span><span>C) 1 Ohm</span><span>D) 100 Ohms</span></div>
+  <a>Ans: B) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An ideal voltage source maintains a constant output voltage regardless of the current drawn from it. Therefore, its internal series resistance is assumed to be exactly Zero (0).</div>
+
+  <q>11. Ideal current source has an internal resistance of:</q>
+  <div class="options-grid"><span>A) Zero</span><span>B) Infinity</span><span>C) Negative</span><span>D) 1 Ohm</span></div>
+  <a>Ans: B) Infinity</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">To supply a constant current regardless of the voltage across its terminals, an ideal current source must have an infinite internal parallel resistance so that no current is diverted internally.</div>
+
+  <q>12. Identify the circuit arrangement shown below:</q>
+  <svg width="150" height="40" stroke="white" stroke-width="2" fill="none">
+    <path d="M10,20 L30,20 L35,10 L45,30 L55,10 L65,30 L70,20 L90,20 L95,10 L105,30 L115,10 L125,30 L130,20 L140,20"/>
+  </svg>
+  <div class="options-grid"><span>A) Parallel Resistors</span><span>B) Series Resistors</span><span>C) Capacitors in Series</span><span>D) Inductors in Parallel</span></div>
+  <a>Ans: B) Series Resistors</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The diagram shows two resistors connected end-to-end along a single continuous path. This represents a classic series connection.</div>
+
+  <q>13. In a parallel circuit, which quantity remains the same across all branches?</q>
+  <div class="options-grid"><span>A) Current</span><span>B) Power</span><span>C) Voltage</span><span>D) Resistance</span></div>
+  <a>Ans: C) Voltage</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Parallel branches are connected directly across the same two common nodes, which means the voltage drop across every single branch remains identical.</div>
+
+  <q>14. In a series circuit, which quantity remains the same across all elements?</q>
+  <div class="options-grid"><span>A) Voltage</span><span>B) Current</span><span>C) Power</span><span>D) Energy</span></div>
+  <a>Ans: B) Current</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a series circuit, there is only one continuous path for the flow of charge. Therefore, the same electric current flows through all connected components.</div>
+
+  <q>15. The formula for electrical energy is:</q>
+  <div class="options-grid"><span>A) P/t</span><span>B) V*I</span><span>C) V*I*t</span><span>D) I^2/R</span></div>
+  <a>Ans: C) V*I*t</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Electrical Energy is defined as the product of Power and Time. Since Power = V * I, the formula for energy becomes V * I * t.</div>
+
+  <q>16. 1 kWh (Kilo-Watt-Hour) is equal to:</q>
+  <div class="options-grid"><span>A) 3.6 x 10^5 Joules</span><span>B) 3.6 x 10^6 Joules</span><span>C) 3600 Joules</span><span>D) 1000 Joules</span></div>
+  <a>Ans: B) 3.6 x 10^6 Joules</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">1 kWh = 1000 Watts * 3600 seconds = 3.6 * 10^6 Watt-seconds (Joules). This represents one standard 'unit' of electricity billed in domestic households.</div>
+
+  <q>17. Temperature coefficient of resistance of a pure metal is generally:</q>
+  <div class="options-grid"><span>A) Negative</span><span>B) Zero</span><span>C) Positive</span><span>D) Infinite</span></div>
+  <a>Ans: C) Positive</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Pure metals have a Positive Temperature Coefficient (PTC). As temperature increases, the thermal vibrations of metal atoms increase, which obstructs the flow of electrons, thereby increasing the resistance.</div>
+
+  <q>18. Which material has a negative temperature coefficient?</q>
+  <div class="options-grid"><span>A) Copper</span><span>B) Aluminum</span><span>C) Semiconductor</span><span>D) Silver</span></div>
+  <a>Ans: C) Semiconductor</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Semiconductors and insulators have a Negative Temperature Coefficient (NTC). As temperature rises, more electrons gain enough energy to break free into the conduction band, reducing the overall resistance.</div>
+
+  <q>19. A node in an electrical network is defined as:</q>
+  <div class="options-grid"><span>A) A closed path</span><span>B) A junction of two or more elements</span><span>C) A single component</span><span>D) A voltage source</span></div>
+  <a>Ans: B) A junction of two or more elements</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A node is a junction point in an electrical circuit where two or more circuit elements (like resistors, sources, etc.) connect.</div>
+
+  <q>20. A loop in a circuit is:</q>
+  <div class="options-grid"><span>A) Any closed path</span><span>B) A junction point</span><span>C) An open circuit</span><span>D) A grounding point</span></div>
+  <a>Ans: A) Any closed path</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A loop refers to any closed path in an electrical network that starts and ends at the exact same node, passing through other nodes only once.</div>
+
+  <q>21. The algebraic sum of voltages around any closed loop is zero. This is:</q>
+  <div class="options-grid"><span>A) KCL</span><span>B) Ohm's Law</span><span>C) KVL</span><span>D) Faraday's Law</span></div>
+  <a>Ans: C) KVL</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">This is the direct statement of Kirchhoff’s Voltage Law (KVL), which represents the principle of conservation of energy in electrical circuits.</div>
+
+  <q>22. The equivalent resistance of a Star network (Ra, Rb, Rc) converted to Delta (Rab, Rbc, Rca) involves:</q>
+  <div class="options-grid"><span>A) Addition only</span><span>B) Sum of pairwise products divided by opposite resistor</span><span>C) Direct multiplication</span><span>D) Subtraction</span></div>
+  <a>Ans: B) Sum of pairwise products divided by opposite resistor</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Star-to-Delta Conversion Formula: Rab = Ra + Rb + (Ra*Rb / Rc) = (Ra*Rb + Rb*Rc + Rc*Ra) / Rc. This involves the sum of pairwise products of star resistances divided by the opposite star branch resistor.</div>
+
+  <q>23. If three identical resistors R are connected in Delta, the equivalent Star resistance is:</q>
+  <div class="options-grid"><span>A) 3R</span><span>B) R/3</span><span>C) R</span><span>D) R/2</span></div>
+  <a>Ans: B) R/3</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When converting a symmetrical Delta network of identical resistors (R) to Star, the equivalent star resistance for each branch is exactly divided by 3, making it R/3.</div>
+
+  <q>24. If three identical resistors R are connected in Star, the equivalent Delta resistance is:</q>
+  <div class="options-grid"><span>A) 3R</span><span>B) R/3</span><span>C) R</span><span>D) 1.5R</span></div>
+  <a>Ans: A) 3R</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When converting a symmetrical Star network of identical resistors (R) to Delta, the equivalent delta resistance becomes exactly three times the star branch value (3R).</div>
+
+  <q>25. Active elements in a circuit are those which:</q>
+  <div class="options-grid"><span>A) Dissipate energy</span><span>B) Store energy</span><span>C) Supply energy</span><span>D) Both A and B</span></div>
+  <a>Ans: C) Supply energy</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Active elements (such as generators, batteries, transistors, and op-amps) have the physical capacity to continuously deliver electrical energy to the circuit.</div>
+
+  <q>26. Which of the following is a passive element?</q>
+  <div class="options-grid"><span>A) Voltage Source</span><span>B) Current Source</span><span>C) Resistor</span><span>D) Battery</span></div>
+  <a>Ans: C) Resistor</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A resistor cannot generate or supply electrical energy. It can only absorb and dissipate it in the form of heat, making it a passive element.</div>
+
+  <q>27. Specific resistance (Resistivity) depends on:</q>
+  <div class="options-grid"><span>A) Length of wire</span><span>B) Area of cross-section</span><span>C) Material nature and temperature</span><span>D) Applied voltage</span></div>
+  <a>Ans: C) Material nature and temperature</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">While resistance depends on geometry (length and cross-sectional area), specific resistance (resistivity, ρ) is an intrinsic property that depends solely on the nature of the material and its temperature.</div>
+
+  <q>28. The unit of resistivity is:</q>
+  <div class="options-grid"><span>A) Ohm</span><span>B) Ohm-meter</span><span>C) Mho-meter</span><span>D) Ohm/meter</span></div>
+  <a>Ans: B) Ohm-meter</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">From the formula R = ρ * (L/A), we can isolate ρ = R * (A/L). Substituting the standard units gives: Ohm * m^2 / m = Ohm-meter (Ω-m).</div>
+
+  <q>29. Power dissipated in a resistor is given by:</q>
+  <div class="options-grid"><span>A) V/R</span><span>B) I^2 * R</span><span>C) I * R^2</span><span>D) V^2 * I</span></div>
+  <a>Ans: B) I^2 * R</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The power dissipated in a resistor is governed by Joule's law of heating: P = I^2 * R. Alternative mathematical forms are P = V^2 / R and P = V * I.</div>
+
+  <q>30. A short circuit has a resistance of:</q>
+  <div class="options-grid"><span>A) Infinity</span><span>B) Zero</span><span>C) 100 Ohms</span><span>D) Negative</span></div>
+  <a>Ans: B) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A short circuit represents a direct connection via an ideal conductor. An ideal conducting path has absolutely Zero (0) electrical resistance.</div>
+
+  <q>31. An open circuit has a current of:</q>
+  <div class="options-grid"><span>A) Infinity</span><span>B) Zero</span><span>C) Maximum possible</span><span>D) Nominal</span></div>
+  <a>Ans: B) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An open circuit represents a completely broken path with infinite resistance. Since the path is physically disconnected, no current can flow (Current = 0).</div>
+
+  <q>32. Electrical conductance (G) is related to resistance (R) by:</q>
+  <div class="options-grid"><span>A) G = R</span><span>B) G = 1/R</span><span>C) G = R^2</span><span>D) G = 1/R^2</span></div>
+  <a>Ans: B) G = 1/R</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Conductance is defined as the mathematical reciprocal of resistance: G = 1/R.</div>
+
+  <q>33. The flow of electric current in metallic conductors is due to:</q>
+  <div class="options-grid"><span>A) Positive ions</span><span>B) Electrons</span><span>C) Protons</span><span>D) Neutrons</span></div>
+  <a>Ans: B) Electrons</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In metals, atoms share their valence electrons in a metallic lattice, creating a "sea of free electrons." When a voltage is applied, these free electrons drift towards the positive potential, constituting an electric current.</div>
+
+  <q>34. Which formula represents the current division rule for two parallel resistors R1 and R2?</q>
+  <div class="options-grid"><span>A) I1 = I * (R1 / (R1+R2))</span><span>B) I1 = I * (R2 / (R1+R2))</span><span>C) I1 = V / R2</span><span>D) I1 = I * R1 * R2</span></div>
+  <a>Ans: B) I1 = I * (R2 / (R1+R2))</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Current Division Rule states that the current flowing through any branch is equal to the total current multiplied by the opposite branch resistance, divided by the sum of both resistances: I1 = I * (R2 / (R1 + R2)).</div>
+
+  <q>35. Voltage division rule applies primarily to:</q>
+  <div class="options-grid"><span>A) Parallel circuits</span><span>B) Series circuits</span><span>C) Both equally</span><span>D) Magnetic circuits</span></div>
+  <a>Ans: B) Series circuits</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a series circuit, current remains identical but voltage is divided across the series components. Thus, the voltage division rule applies specifically to series configurations.</div>
+
+  <q>36. A 10V battery is connected across a 5Ω resistor. The power is:</q>
+  <div class="options-grid"><span>A) 50 W</span><span>B) 2 W</span><span>C) 20 W</span><span>D) 5 W</span></div>
+  <a>Ans: C) 20 W</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Using the power formula: P = V^2 / R = 10^2 / 5 = 100 / 5 = 20 Watts (W).</div>
+
+  <q>37. What happens to total resistance when more resistors are added in parallel?</q>
+  <div class="options-grid"><span>A) Increases</span><span>B) Decreases</span><span>C) Remains same</span><span>D) Becomes zero</span></div>
+  <a>Ans: B) Decreases</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Adding more branches in parallel provides alternative paths for the current to flow. This reduces the overall opposition to the current, causing the equivalent resistance to decrease.</div>
+
+  <q>38. Independent sources are denoted by:</q>
+  <div class="options-grid"><span>A) Diamond shape</span><span>B) Circle shape</span><span>C) Square shape</span><span>D) Triangle shape</span></div>
+  <a>Ans: B) Circle shape</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In standard circuit schematic conventions, independent voltage and current sources are represented using a circular symbol.</div>
+
+  <q>39. Dependent sources are usually denoted by:</q>
+  <div class="options-grid"><span>A) Diamond shape</span><span>B) Circle shape</span><span>C) Rectangle shape</span><span>D) Oval shape</span></div>
+  <a>Ans: A) Diamond shape</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Dependent (or controlled) sources, whose output value depends on another voltage or current elsewhere in the circuit, are represented by a diamond-shaped symbol.</div>
+
+  <q>40. Superconductivity is a condition of:</q>
+  <div class="options-grid"><span>A) Infinite resistance</span><span>B) Zero resistance</span><span>C) High voltage</span><span>D) Maximum power</span></div>
+  <a>Ans: B) Zero resistance</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Superconductivity is a quantum mechanical state where certain materials exhibit exactly Zero (0) electrical resistance when cooled below their characteristic critical transition temperature.</div>
+
+  <!-- CHAPTER 2 -->
+  <h2>2. Network Theorems</h2>
+
+  <q>41. Superposition theorem is valid for:</q>
+  <div class="options-grid"><span>A) Linear circuits</span><span>B) Non-linear circuits</span><span>C) Both A and B</span><span>D) Neither A nor B</span></div>
+  <a>Ans: A) Linear circuits</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Superposition Theorem is mathematically rooted in the principles of linearity (additivity and homogeneity). Therefore, it can only be applied to linear active networks.</div>
+
+  <q>42. Superposition theorem is NOT applicable to calculate:</q>
+  <div class="options-grid"><span>A) Voltage</span><span>B) Current</span><span>C) Power</span><span>D) All of the above</span></div>
+  <a>Ans: C) Power</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Power is a non-linear parameter because it depends on the square of the current or voltage (P = I^2*R or V^2/R). Thus, individual power contributions from each source cannot be directly summed using superposition.</div>
+
+  <q>43. In Superposition theorem, while considering one source, ideal voltage sources are:</q>
+  <div class="options-grid"><span>A) Open circuited</span><span>B) Short circuited</span><span>C) Kept as is</span><span>D) Replaced by current sources</span></div>
+  <a>Ans: B) Short circuited</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">To deactivate an independent ideal voltage source while keeping its internal resistance intact, we replace it with a Short Circuit (since its internal resistance is zero).</div>
+
+  <q>44. In Superposition theorem, ideal current sources are:</q>
+  <div class="options-grid"><span>A) Open circuited</span><span>B) Short circuited</span><span>C) Doubled</span><span>D) Halved</span></div>
+  <a>Ans: A) Open circuited</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">To deactivate an independent ideal current source, we replace it with an Open Circuit (since its internal parallel resistance is infinite).</div>
+
+  <q>45. Thevenin’s equivalent circuit consists of:</q>
+  <svg width="120" height="60" stroke="white" stroke-width="2" fill="none">
+    <circle cx="20" cy="30" r="10"/>
+    <text x="12" y="34" fill="yellow" stroke="none" font-size="10">Vth</text>
+    <path d="M20,20 L20,10 L40,10 L45,0 L55,20 L65,0 L75,20 L80,10 L100,10"/>
+    <text x="50" y="35" fill="white" stroke="none" font-size="12">Rth</text>
+    <path d="M20,40 L20,50 L100,50"/>
+    <circle cx="100" cy="10" r="2" fill="white"/>
+    <circle cx="100" cy="50" r="2" fill="white"/>
+  </svg>
+  <div class="options-grid"><span>A) Vth in parallel with Rth</span><span>B) Vth in series with Rth</span><span>C) Ith in series with Rth</span><span>D) Ith in parallel with Rth</span></div>
+  <a>Ans: B) Vth in series with Rth</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Thevenin's Theorem states that any complex active linear network, when viewed from two terminals, can be replaced by an equivalent circuit containing a single independent voltage source (Vth) connected in series with an equivalent resistance (Rth).</div>
+
+  <q>46. Norton’s equivalent circuit consists of:</q>
+  <div class="options-grid"><span>A) V in series with R</span><span>B) I in series with R</span><span>C) I in parallel with R</span><span>D) V in parallel with R</span></div>
+  <a>Ans: C) I in parallel with R</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Norton's Theorem is the mathematical dual of Thevenin's Theorem. It reduces a complex network into an equivalent current source (IN) in parallel with an equivalent resistance (RN).</div>
+
+  <q>47. Thevenin resistance (Rth) is found by:</q>
+  <div class="options-grid"><span>A) Shorting load & sources</span><span>B) Looking into terminals with sources killed</span><span>C) Opening all resistors</span><span>D) Shorting the terminals directly</span></div>
+  <a>Ans: B) Looking into terminals with sources killed</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">To find Rth, the load resistor is disconnected (open-circuited). All independent voltage sources are replaced by short circuits and independent current sources by open circuits, and the equivalent input resistance is determined.</div>
+
+  <q>48. Maximum power is transferred to a load when load resistance RL is:</q>
+  <div class="options-grid"><span>A) RL > Rth</span><span>B) RL < Rth</span><span>C) RL = Rth</span><span>D) RL = 0</span></div>
+  <a>Ans: C) RL = Rth</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">According to the Maximum Power Transfer Theorem, maximum power is transferred from a source to a load when the load resistance (RL) is exactly equal to the source's internal equivalent resistance (Rth).</div>
+
+  <q>49. The efficiency of maximum power transfer in DC circuits is:</q>
+  <div class="options-grid"><span>A) 100%</span><span>B) 75%</span><span>C) 50%</span><span>D) 25%</span></div>
+  <a>Ans: C) 50%</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When RL = Rth, the total power is divided equally between the source resistance and the load resistance. Therefore, the power transfer efficiency is exactly η = PLoad / PTotal = 50%.</div>
+
+  <q>50. Norton current (IN) is essentially the:</q>
+  <div class="options-grid"><span>A) Open circuit voltage</span><span>B) Short circuit current</span><span>C) Average current</span><span>D) Leakage current</span></div>
+  <a>Ans: B) Short circuit current</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Norton current (IN) is evaluated by short-circuiting the output/load terminals and measuring the current that flows through the shorted branch.</div>
+
+  <q>51. Millman’s theorem yields an equivalent:</q>
+  <div class="options-grid"><span>A) Voltage or Current source</span><span>B) Resistance only</span><span>C) Power source</span><span>D) Inductor</span></div>
+  <a>Ans: A) Voltage or Current source</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Millman's theorem is a convenient shortcut used to simplify several parallel branches containing voltage sources and resistors into a single equivalent voltage or current source.</div>
+
+  <q>52. Reciprocity theorem is applicable to networks that are:</q>
+  <div class="options-grid"><span>A) Linear & Bilateral</span><span>B) Non-linear & Unilateral</span><span>C) Active & Bilateral</span><span>D) Time-variant</span></div>
+  <a>Ans: A) Linear & Bilateral</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Reciprocity Theorem applies specifically to linear, bilateral, and passive network elements (like resistors, inductors, and capacitors) where the excitation and response can be swapped.</div>
+
+  <q>53. Reciprocity theorem states that the ratio of excitation to response is:</q>
+  <div class="options-grid"><span>A) Zero</span><span>B) Constant</span><span>C) Infinite</span><span>D) Negative</span></div>
+  <a>Ans: B) Constant</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Reciprocity Theorem states that if you swap the locations of the voltage source (excitation) and the current measurement (response) in a linear bilateral network, the transfer ratio remains Constant.</div>
+
+  <q>54. Tellegen’s theorem is based on the principle of conservation of:</q>
+  <div class="options-grid"><span>A) Charge</span><span>B) Voltage</span><span>C) Power</span><span>D) Current</span></div>
+  <a>Ans: C) Power</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Tellegen's theorem states that the sum of power delivered or absorbed by all components in an electrical network is exactly zero: Σ (v_k * i_k) = 0. This is based on the conservation of power/energy.</div>
+
+  <q>55. Substitution theorem is applicable to:</q>
+  <div class="options-grid"><span>A) Linear circuits only</span><span>B) Non-linear circuits only</span><span>C) Both linear and non-linear</span><span>D) AC circuits only</span></div>
+  <a>Ans: C) Both linear and non-linear</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Substitution Theorem states that any branch in an active network can be replaced by an equivalent voltage or current source, provided the terminal voltage and current of that branch remain unchanged. It is applicable to both linear and non-linear circuits.</div>
+
+  <q>56. Compensation theorem is useful in finding the effect of:</q>
+  <div class="options-grid"><span>A) Adding a new source</span><span>B) Change in branch resistance</span><span>C) Temperature drop</span><span>D) Frequency change</span></div>
+  <a>Ans: B) Change in branch resistance</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Compensation Theorem is used to evaluate the impact on all other branch currents and node voltages when a specific branch resistance undergoes a change of ΔR.</div>
+
+  <q>57. For a two-terminal network, Vth = 10V and I_short_circuit = 2A. What is Rth?</q>
+  <div class="options-grid"><span>A) 20 Ω</span><span>B) 10 Ω</span><span>C) 5 Ω</span><span>D) 0.2 Ω</span></div>
+  <a>Ans: C) 5 Ω</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The relationship formula is: Rth = Vth / Isc (where Isc is the short-circuit Norton current). Here, Rth = 10V / 2A = 5Ω.</div>
+
+  <q>58. Dual of Thevenin’s Theorem is:</q>
+  <div class="options-grid"><span>A) Superposition Theorem</span><span>B) Norton’s Theorem</span><span>C) Millman’s Theorem</span><span>D) Tellegen’s Theorem</span></div>
+  <a>Ans: B) Norton’s Theorem</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The dual equivalent of a voltage source in series with a resistor (Thevenin's Model) is a current source in parallel with a resistor (Norton's Model).</div>
+
+  <q>59. A linear network contains only:</q>
+  <div class="options-grid"><span>A) Independent sources</span><span>B) Linear elements</span><span>C) Both A and B</span><span>D) Non-linear elements</span></div>
+  <a>Ans: C) Both A and B (linear elements and sources)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A linear network comprises linear, bilateral passive components (R, L, C) as well as active independent energy sources that satisfy the superposition principle.</div>
+
+  <q>60. Thevenin’s theorem reduces a complex circuit to:</q>
+  <div class="options-grid"><span>A) Single R</span><span>B) Single V source and series R</span><span>C) Single I source</span><span>D) Many loops</span></div>
+  <a>Ans: B) Single V source and series R</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The fundamental principle of Thevenin's theorem is to simplify any complex multi-loop circuit down to a single independent voltage source connected in series with a single resistor.</div>
+
+  <q>61. While finding Rth, dependent sources are:</q>
+  <div class="options-grid"><span>A) Shorted</span><span>B) Opened</span><span>C) Left intact</span><span>D) Replaced by R</span></div>
+  <a>Ans: C) Left intact</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Because the output of a dependent source is controlled by another circuit variable, they cannot be turned off. They must be left intact and are typically solved using a test voltage/current method.</div>
+
+  <q>62. If Vth = 20V and RL = Rth = 10Ω, max power delivered is:</q>
+  <div class="options-grid"><span>A) 10W</span><span>B) 20W</span><span>C) 40W</span><span>D) 100W</span></div>
+  <a>Ans: A) 10W</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Maximum Power Formula: Pmax = Vth^2 / (4 * Rth) = (20)^2 / (4 * 10) = 400 / 40 = 10 Watts (W).</div>
+
+  <q>63. In Reciprocity theorem, we interchange:</q>
+  <div class="options-grid"><span>A) Resistors and Inductors</span><span>B) Source and Response</span><span>C) Voltage and Current</span><span>D) Nodes and Meshes</span></div>
+  <a>Ans: B) Source and Response</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">To verify the Reciprocity Theorem, we swap the physical locations of the excitation source and the resulting measured response. The ratio of excitation to response remains unchanged.</div>
+
+  <q>64. Norton's equivalent resistance (Rn) is equal to:</q>
+  <div class="options-grid"><span>A) Rth</span><span>B) 1/Rth</span><span>C) Rth^2</span><span>D) 0</span></div>
+  <a>Ans: A) Rth</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Norton's equivalent resistance (RN) is identical to Thevenin's equivalent resistance (Rth). The process of looking into the terminals with sources deactivated is identical.</div>
+
+  <q>65. Source transformation converts a voltage source V in series with R into:</q>
+  <div class="options-grid"><span>A) I = V*R in parallel</span><span>B) I = V/R in parallel</span><span>C) I = R/V in series</span><span>D) I = V/R in series</span></div>
+  <a>Ans: B) I = V/R in parallel</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Using Ohm's Law and source equivalence, a voltage source V in series with R is mathematically equivalent to a current source I = V/R connected in parallel with the same resistor R.</div>
+
+  <q>66. Star-Delta transformation is an application of:</q>
+  <div class="options-grid"><span>A) Superposition</span><span>B) Network simplification</span><span>C) Thevenin</span><span>D) Tellegen</span></div>
+  <a>Ans: B) Network simplification</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Star-Delta transformations are mathematical tools used for network simplification, especially when resistors are configured in bridges or loops that are neither series nor parallel.</div>
+
+  <q>67. If a network has no dependent sources, Rth can be found by:</q>
+  <div class="options-grid"><span>A) Applying a test voltage</span><span>B) Deactivating independent sources and simplifying</span><span>C) Both A and B</span><span>D) Neither A nor B</span></div>
+  <a>Ans: C) Both A and B</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">If there are no dependent sources, we can either: (A) apply an external test source Vdc and find Idc, or (B) deactivate independent sources (short voltage, open current) and calculate the equivalent series-parallel resistance. Both methods are correct.</div>
+
+  <q>68. Maximum power transfer theorem is used in:</q>
+  <div class="options-grid"><span>A) Power systems</span><span>B) Communication circuits (Impedance matching)</span><span>C) Home wiring</span><span>D) Transformers</span></div>
+  <a>Ans: B) Communication circuits (Impedance matching)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Power grids prioritize maximum efficiency (>95%). In contrast, communication circuits process small signals where maximizing total power transfer (impedance matching) is the primary goal to avoid signal distortion.</div>
+
+  <q>69. In a linear circuit, doubling the source voltage causes the currents to:</q>
+  <div class="options-grid"><span>A) Halve</span><span>B) Remain same</span><span>C) Double</span><span>D) Quadruple</span></div>
+  <a>Ans: C) Double</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">According to the homogeneity (scaling) property of linear circuits, multiplying the input excitation by a factor of 'k' (doubling) scales the output response (currents) by the exact same factor 'k'.</div>
+
+  <q>70. A circuit which satisfies both superposition and homogeneity principles is called:</q>
+  <div class="options-grid"><span>A) Non-linear</span><span>B) Bilateral</span><span>C) Linear</span><span>D) Active</span></div>
+  <a>Ans: C) Linear</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">By mathematical definition, any system or circuit is classified as linear if and only if it strictly satisfies both the principles of Superposition (additivity) and Homogeneity (scaling).</div>
+
+  <q>71. The sum of powers absorbed by all elements in a circuit is zero. This is:</q>
+  <div class="options-grid"><span>A) KVL</span><span>B) Tellegen’s theorem</span><span>C) Millman's theorem</span><span>D) Superposition</span></div>
+  <a>Ans: B) Tellegen’s theorem</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">This is Tellegen's Theorem, which mathematically states that the total sum of power generated by active sources is exactly equal to the total power absorbed by passive components, resulting in a net sum of zero.</div>
+
+  <q>72. Reciprocity theorem is NOT applicable for circuits containing:</q>
+  <div class="options-grid"><span>A) Dependent sources</span><span>B) Resistors</span><span>C) Inductors</span><span>D) Capacitors</span></div>
+  <a>Ans: A) Dependent sources</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Reciprocity Theorem requires the circuit elements to be strictly passive and bilateral. Dependent sources are active and non-bilateral, violating this prerequisite.</div>
+
+  <q>73. According to Millman’s theorem, equivalent voltage V_eq for parallel branches is:</q>
+  <div class="options-grid"><span>A) Σ(V/R) / Σ(1/R)</span><span>B) ΣV / ΣR</span><span>C) Σ(V*R)</span><span>D) ΣR / ΣV</span></div>
+  <a>Ans: A) Σ(V/R) / Σ(1/R)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Millman's formula computes equivalent voltage as: Veq = (V1*G1 + V2*G2...) / (G1 + G2...), where conductance G = 1/R. This can be expressed as: Σ(V/R) / Σ(1/R).</div>
+
+  <q>74. When finding Thevenin's voltage across an open circuit, the current through the open circuit is:</q>
+  <div class="options-grid"><span>A) Maximum</span><span>B) Infinite</span><span>C) Zero</span><span>D) Vth/Rth</span></div>
+  <a>Ans: C) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Because an open circuit possesses infinite electrical resistance, the current flowing through those terminals is strictly Zero (0).</div>
+
+  <q>75. Can Thevenin's theorem be applied to AC circuits?</q>
+  <div class="options-grid"><span>A) No</span><span>B) Yes, using impedances (Z)</span><span>C) Only for resistors in AC</span><span>D) Only at resonance</span></div>
+  <a>Ans: B) Yes, using impedances (Z)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Thevenin's Theorem is equally applicable to AC circuits. The only difference is that DC resistances are replaced by complex AC Impedances (Z = R + jX) and voltages are treated as phasors.</div>
+
+  <q>76. A circuit is said to be bilateral if its behavior is independent of:</q>
+  <div class="options-grid"><span>A) Voltage magnitude</span><span>B) Current magnitude</span><span>C) Direction of current</span><span>D) Time</span></div>
+  <a>Ans: C) Direction of current</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An element is bilateral if it conducts electrical current equally well in both directions, meaning its impedance parameters remain identical regardless of the direction of the current.</div>
+
+  <q>77. Which diode circuit violates the Reciprocity Theorem?</q>
+  <div class="options-grid"><span>A) Unilateral nature of diode</span><span>B) High resistance</span><span>C) Low capacitance</span><span>D) Inductance</span></div>
+  <a>Ans: A) Unilateral nature of diode</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A diode is a unilateral device (it conducts in forward bias but blocks current in reverse bias). This asymmetry violates the bilateral requirement needed to satisfy the Reciprocity Theorem.</div>
+
+  <q>78. A voltage source in series with an open switch has a Thevenin equivalent of:</q>
+  <div class="options-grid"><span>A) Vth=V, Rth=0</span><span>B) Vth=0, Rth=Infinity</span><span>C) Vth=V, Rth=Infinity</span><span>D) Vth=0, Rth=0</span></div>
+  <a>Ans: B) Vth=0, Rth=Infinity</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An open switch blocks any current flow and acts as an infinite resistance (Rth = Infinity). Since no energy is transferred across the terminals, the open-circuit voltage is zero (Vth = 0).</div>
+
+  <q>79. An ideal current source has zero:</q>
+  <div class="options-grid"><span>A) Internal resistance</span><span>B) Internal conductance</span><span>C) Voltage</span><span>D) Current</span></div>
+  <a>Ans: B) Internal conductance</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An ideal current source has an infinite internal parallel resistance (R_int = ∞). Since internal conductance (G) is the reciprocal of resistance, G = 1 / R_int = 1 / ∞ = Zero (0).</div>
+
+  <q>80. Superposition theorem is widely used for solving networks with:</q>
+  <div class="options-grid"><span>A) Single source</span><span>B) Multiple sources</span><span>C) No sources</span><span>D) Only dependent sources</span></div>
+  <a>Ans: B) Multiple sources</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Superposition Theorem is specifically designed to analyze multi-source networks by calculating the individual contribution of each independent source acting alone.</div>
+
+  <!-- CHAPTER 3 -->
+  <h2>3. AC Fundamentals</h2>
+  
+  <q>81. The equation of an alternating voltage is v = Vm sin(ωt). Here Vm is:</q>
+  <svg width="200" height="60" stroke="white" stroke-width="2" fill="none">
+    <line x1="0" y1="30" x2="200" y2="30" stroke="gray"/>
+    <path d="M10,30 Q35,0 60,30 T110,30 T160,30"/>
+    <line x1="35" y1="30" x2="35" y2="12" stroke="yellow" stroke-dasharray="2"/>
+    <text x="38" y="25" fill="yellow" font-size="12">Vm</text>
+  </svg>
+  <div class="options-grid"><span>A) RMS value</span><span>B) Average value</span><span>C) Peak (Maximum) value</span><span>D) Instantaneous value</span></div>
+  <a>Ans: C) Peak (Maximum) value</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In the sinusoidal wave equation v = Vm sin(ωt), 'Vm' represents the maximum displacement from the zero reference line, commonly known as the Peak (Maximum) Value.</div>
+
+  <q>82. RMS value of a sinusoidal wave is related to its peak value (Vm) by:</q>
+  <div class="options-grid"><span>A) Vrms = Vm / √2</span><span>B) Vrms = Vm * √2</span><span>C) Vrms = Vm / 2</span><span>D) Vrms = Vm / π</span></div>
+  <a>Ans: A) Vrms = Vm / √2</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The RMS (Root Mean Square) value corresponds to the equivalent heating effect of DC. For a pure sine wave, mathematical integration yields: Vrms = Vm / √2 ≈ 0.707 * Vm.</div>
+
+  <q>83. Average value of a full sinusoidal wave over one complete cycle is:</q>
+  <div class="options-grid"><span>A) Vm/2</span><span>B) 2Vm/π</span><span>C) Zero</span><span>D) Vm</span></div>
+  <a>Ans: C) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Because a pure sine wave is perfectly symmetrical, its positive half-cycle and negative half-cycle are identical. Their sum over one complete cycle cancels out, resulting in an average value of exactly Zero (0).</div>
+
+  <q>84. Average value of a half-wave rectified sine wave is:</q>
+  <div class="options-grid"><span>A) Vm/π</span><span>B) 2Vm/π</span><span>C) Vm/2</span><span>D) Vm/√2</span></div>
+  <a>Ans: A) Vm/π</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A half-wave rectifier blocks the negative half-cycle and only allows the positive half-cycle to pass. Integrating over the full cycle (2π) yields: Vavg = Vm / π.</div>
+
+  <q>85. Form Factor is the ratio of:</q>
+  <div class="options-grid"><span>A) Peak to RMS</span><span>B) RMS to Average</span><span>C) Average to RMS</span><span>D) Peak to Average</span></div>
+  <a>Ans: B) RMS to Average</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Form Factor indicates the shape of an AC wave. It is defined as the mathematical ratio of the RMS value to the Average value: Form Factor = RMS Value / Average Value.</div>
+
+  <q>86. Form factor of a pure sinusoidal wave is:</q>
+  <div class="options-grid"><span>A) 1.414</span><span>B) 1.11</span><span>C) 0.707</span><span>D) 0.637</span></div>
+  <a>Ans: B) 1.11</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For a pure sine wave, Vrms = 0.707 * Vm and Vavg = 0.637 * Vm. Their ratio (Form Factor) is: 0.707 / 0.637 ≈ 1.11.</div>
+
+  <q>87. Peak Factor (Crest Factor) is the ratio of:</q>
+  <div class="options-grid"><span>A) RMS to Average</span><span>B) Average to Peak</span><span>C) Peak to RMS</span><span>D) Peak to Average</span></div>
+  <a>Ans: C) Peak to RMS</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Peak Factor measures how sharp the peak of an AC wave is. It is defined as the ratio of the Peak (Maximum) value to the RMS value: Peak Factor = Maximum Value / RMS Value.</div>
+
+  <q>88. Peak factor of a pure sinusoidal wave is:</q>
+  <div class="options-grid"><span>A) 1.11</span><span>B) 1.414 (√2)</span><span>C) 2.0</span><span>D) 0.707</span></div>
+  <a>Ans: B) 1.414 (√2)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For a pure sine wave: Peak Factor = Vm / Vrms = Vm / (Vm / √2) = √2 ≈ 1.414.</div>
+
+  <q>89. The angular frequency ω is equal to:</q>
+  <div class="options-grid"><span>A) 2πf</span><span>B) πf</span><span>C) f/2π</span><span>D) 2π/f</span></div>
+  <a>Ans: A) 2πf</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Angular frequency (ω), measured in radians per second, is mathematically related to cyclic frequency (f), measured in Hertz, by the relationship: ω = 2πf.</div>
+
+  <q>90. In a pure resistive AC circuit, voltage and current are:</q>
+  <div class="options-grid"><span>A) Out of phase by 90°</span><span>B) In phase</span><span>C) Current leads by 90°</span><span>D) Voltage leads by 90°</span></div>
+  <a>Ans: B) In phase</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a purely resistive circuit, current is directly proportional to voltage at every instant (i = v/R). Both waveforms reach their maximum and zero points at the exact same times, meaning they are perfectly 'In Phase' (Phase angle difference = 0°).</div>
+
+  <q>91. In a pure inductive circuit, current:</q>
+  <div class="options-grid"><span>A) Leads voltage by 90°</span><span>B) Lags voltage by 90°</span><span>C) Is in phase with voltage</span><span>D) Lags voltage by 45°</span></div>
+  <a>Ans: B) Lags voltage by 90°</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An inductor opposes changes in current by inducing a counter-electromotive force (back-EMF). This causes the current waveform to lag behind the voltage waveform by exactly 90° (π/2 radians).</div>
+
+  <q>92. In a pure capacitive circuit, current:</q>
+  <div class="options-grid"><span>A) Lags voltage by 90°</span><span>B) Is in phase</span><span>C) Leads voltage by 90°</span><span>D) Leads voltage by 180°</span></div>
+  <a>Ans: C) Leads voltage by 90°</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a capacitive circuit, charge must accumulate on the plates before a voltage can develop. Current must flow first, which means current leads the voltage by exactly 90° (π/2 radians).</div>
+
+  <q>93. Inductive reactance (XL) is given by:</q>
+  <div class="options-grid"><span>A) 1 / (2πfL)</span><span>B) 2πfL</span><span>C) f / (2πL)</span><span>D) 2πf/L</span></div>
+  <a>Ans: B) 2πfL</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Inductive reactance (XL) is the opposition offered by an inductor to the flow of AC. It is directly proportional to the frequency and is calculated as: XL = ω*L = 2πfL.</div>
+
+  <q>94. Capacitive reactance (XC) is given by:</q>
+  <div class="options-grid"><span>A) 2πfC</span><span>B) 1 / (2πfC)</span><span>C) 2π/fC</span><span>D) f / 2πC</span></div>
+  <a>Ans: B) 1 / (2πfC)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Capacitive reactance (XC) is the opposition offered by a capacitor to the flow of AC. It is inversely proportional to frequency and is calculated as: XC = 1 / (ω*C) = 1 / (2πfC).</div>
+
+  <q>95. Impedance (Z) of a series RL circuit is:</q>
+  <div class="options-grid"><span>A) R + XL</span><span>B) √(R^2 + XL^2)</span><span>C) R - XL</span><span>D) √(R^2 - XL^2)</span></div>
+  <a>Ans: B) √(R^2 + XL^2)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a series RL circuit, resistance (R) and inductive reactance (XL) are perpendicular to each other in the phasor domain (at 90°). Thus, the total impedance magnitude is calculated as: Z = √(R^2 + XL^2).</div>
+
+  <q>96. Power factor (cos φ) of an AC circuit is the ratio of:</q>
+  <div class="options-grid"><span>A) Apparent Power / Real Power</span><span>B) Real Power / Apparent Power</span><span>C) Reactive Power / Real Power</span><span>D) Z / R</span></div>
+  <a>Ans: B) Real Power / Apparent Power</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Power Factor (cos φ) represents the ratio of useful active power (Real Power, in Watts) to total drawn power (Apparent Power, in Volt-Amperes). It can also be expressed as R / Z.</div>
+
+  <q>97. The unit of Apparent Power is:</q>
+  <div class="options-grid"><span>A) Watts (W)</span><span>B) Volt-Amperes Reactive (VAR)</span><span>C) Volt-Amperes (VA)</span><span>D) Joules</span></div>
+  <a>Ans: C) Volt-Amperes (VA)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Apparent Power (S = V * I) is the combined phasor sum of real and reactive power. Its unit is Volt-Amperes (VA). Watts is for real power, and VAR is for reactive power.</div>
+
+  <q>98. The unit of Reactive Power is:</q>
+  <div class="options-grid"><span>A) W</span><span>B) VA</span><span>C) VAR</span><span>D) V</span></div>
+  <a>Ans: C) VAR</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Reactive power (Q = V * I * sin φ) is the power that oscillates back and forth between inductive/capacitive elements and the source. It is measured in Volt-Amperes Reactive (VAR).</div>
+
+  <q>99. At series resonance, the circuit behaves like a:</q>
+  <div class="options-grid"><span>A) Pure Inductor</span><span>B) Pure Capacitor</span><span>C) Pure Resistor</span><span>D) Open Circuit</span></div>
+  <a>Ans: C) Pure Resistor</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">At series resonance, inductive reactance (XL) and capacitive reactance (XC) are equal in magnitude but opposite in phase, cancelling each other out completely. Therefore, the circuit behaves purely as a resistor.</div>
+
+  <q>100. The resonant frequency (fr) of a series RLC circuit is:</q>
+  <div class="options-grid"><span>A) 1 / (2π√LC)</span><span>B) 2π√LC</span><span>C) 1 / √LC</span><span>D) √(L/C)</span></div>
+  <a>Ans: A) 1 / (2π√LC)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Equating XL = XC gives: 2πfL = 1 / (2πfC). Solving for frequency (f) yields the resonant frequency: fr = 1 / (2π√LC).</div>
+
+  <q>101. At series resonance, the impedance is:</q>
+  <div class="options-grid"><span>A) Maximum</span><span>B) Minimum</span><span>C) Zero</span><span>D) Infinite</span></div>
+  <a>Ans: B) Minimum (Z = R)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Since Z = √[R^2 + (XL - XC)^2], when XL = XC at resonance, the reactive term becomes zero. The impedance reaches its minimum value, which is exactly equal to the resistance R.</div>
+
+  <q>102. At parallel resonance, the impedance of a practical tank circuit is:</q>
+  <div class="options-grid"><span>A) Minimum</span><span>B) Maximum</span><span>C) Zero</span><span>D) Equal to R</span></div>
+  <a>Ans: B) Maximum</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">At parallel resonance, the reactive branch currents cancel out, resulting in a minimum current drawn from the main source. Since current is minimized at resonance, the equivalent parallel impedance reaches its Maximum value.</div>
+
+  <q>103. Q-factor of a series RLC circuit is:</q>
+  <div class="options-grid"><span>A) (1/R) * √(L/C)</span><span>B) R * √(C/L)</span><span>C) (1/R) * √(C/L)</span><span>D) R * √(L/C)</span></div>
+  <a>Ans: A) (1/R) * √(L/C)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Quality (Q) factor measures the sharpness of the resonant peak. It is derived as: Q = ωr*L / R = (1 / √LC) * L / R = (1/R) * √(L/C).</div>
+
+  <q>104. Bandwidth (BW) of a resonant circuit is related to Q-factor by:</q>
+  <div class="options-grid"><span>A) BW = fr * Q</span><span>B) BW = fr / Q</span><span>C) BW = Q / fr</span><span>D) BW = fr + Q</span></div>
+  <a>Ans: B) BW = fr / Q</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Q-factor and Bandwidth are inversely proportional. A higher Q-factor indicates a sharper resonant curve (narrower bandwidth), which translates to higher selectivity: BW = fr / Q.</div>
+
+  <q>105. An AC wave is v = 100 sin(314t). The frequency is approximately:</q>
+  <div class="options-grid"><span>A) 314 Hz</span><span>B) 100 Hz</span><span>C) 50 Hz</span><span>D) 60 Hz</span></div>
+  <a>Ans: C) 50 Hz</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Comparing the expression with the standard form v = Vm sin(ωt), we get ω = 314 rad/s. Since ω = 2πf, the frequency is f = 314 / (2 * 3.1415) = 314 / 6.28 = 50 Hz.</div>
+
+  <q>106. The operator 'j' rotates a phasor by:</q>
+  <div class="options-grid"><span>A) 45°</span><span>B) 90° CCW</span><span>C) 180°</span><span>D) 90° CW</span></div>
+  <a>Ans: B) 90° Counter-Clockwise (CCW)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In complex mathematics and phasor analysis, multiplying a phasor by the operator 'j' rotates the phasor by exactly 90° in the positive direction, which is Counter-Clockwise (CCW).</div>
+
+  <q>107. j^2 is equal to:</q>
+  <div class="options-grid"><span>A) 1</span><span>B) -1</span><span>C) j</span><span>D) -j</span></div>
+  <a>Ans: B) -1</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The operator 'j' is defined as the imaginary unit where j = √(-1). Therefore, j^2 = (√-1) * (√-1) = -1.</div>
+
+  <q>108. In complex form, Impedance Z = R + jX. If X is negative, the circuit is:</q>
+  <div class="options-grid"><span>A) Inductive</span><span>B) Capacitive</span><span>C) Resistive</span><span>D) Resonant</span></div>
+  <a>Ans: B) Capacitive</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The standard impedance formula is Z = R + j(XL - XC). If the imaginary part (X) is negative, it indicates that the capacitive reactance (XC) dominates, making the circuit capacitive.</div>
+
+  <q>109. Admittance (Y) is the reciprocal of:</q>
+  <div class="options-grid"><span>A) Resistance</span><span>B) Reactance</span><span>C) Impedance</span><span>D) Susceptance</span></div>
+  <a>Ans: C) Impedance</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Just as conductance is the reciprocal of resistance, the overall admittance (Y) is defined as the reciprocal of complex Impedance (Z): Y = 1/Z.</div>
+
+  <q>110. The imaginary part of Admittance is called:</q>
+  <div class="options-grid"><span>A) Conductance</span><span>B) Resistance</span><span>C) Susceptance</span><span>D) Reactance</span></div>
+  <a>Ans: C) Susceptance (B)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Admittance can be expressed in complex form as Y = G + jB, where G is the real part (Conductance) and B is the imaginary part (Susceptance).</div>
+
+  <q>111. Form factor of a square wave is:</q>
+  <div class="options-grid"><span>A) 1.11</span><span>B) 1.0</span><span>C) 1.414</span><span>D) 0.5</span></div>
+  <a>Ans: B) 1.0</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For a square wave, the maximum value, RMS value, and average value are all identical (Vrms = Vavg = Vm). Thus, the Form Factor = Vrms / Vavg = 1.0.</div>
+
+  <q>112. Peak factor of a square wave is:</q>
+  <div class="options-grid"><span>A) 1.0</span><span>B) 1.414</span><span>C) 1.11</span><span>D) 2.0</span></div>
+  <a>Ans: A) 1.0</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Peak Factor = Maximum Value / RMS Value. For a square wave, since Vm = Vrms, the Peak Factor is exactly 1.0.</div>
+
+  <q>113. Power factor of a pure resistive circuit is:</q>
+  <div class="options-grid"><span>A) 0</span><span>B) 0.5</span><span>C) 1 (Unity)</span><span>D) 0.8 lagging</span></div>
+  <a>Ans: C) 1 (Unity)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a purely resistive circuit, the phase angle difference (φ) between voltage and current is zero. Thus, the power factor is cos φ = cos(0°) = 1 (Unity).</div>
+
+  <q>114. Power factor of a pure inductive circuit is:</q>
+  <div class="options-grid"><span>A) Unity</span><span>B) Zero lagging</span><span>C) Zero leading</span><span>D) 0.5 lagging</span></div>
+  <a>Ans: B) Zero lagging</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a purely inductive circuit, the current lags the voltage by exactly 90° (φ = -90°). Thus, the power factor is cos(90°) = 0, which is termed Zero lagging.</div>
+
+  <q>115. Half-power frequencies are those where power becomes:</q>
+  <div class="options-grid"><span>A) Half of max power</span><span>B) Double of max power</span><span>C) Zero</span><span>D) Equal to max power</span></div>
+  <a>Ans: A) Half of max power</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">At half-power frequencies (f1, f2), the current drops to 70.7% (Imax / √2) of its maximum value. Since power is proportional to the square of current ($P = I^2 R$), the power drops to exactly half of its maximum value.</div>
+
+  <q>116. A phasor represents a sinusoidal quantity having:</q>
+  <div class="options-grid"><span>A) Magnitude only</span><span>B) Phase only</span><span>C) Magnitude and Phase</span><span>D) Frequency only</span></div>
+  <a>Ans: C) Magnitude and Phase</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A phasor is a complex vector that represents a sinusoidal wave by showing both its magnitude (length of vector) and its phase angle (direction) relative to a reference.</div>
+
+  <q>117. The time period (T) of a 50Hz AC supply is:</q>
+  <div class="options-grid"><span>A) 20 ms</span><span>B) 50 ms</span><span>C) 2 ms</span><span>D) 10 ms</span></div>
+  <a>Ans: A) 20 ms</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The time period is the reciprocal of frequency: T = 1/f. For f = 50Hz, T = 1 / 50 = 0.02 seconds = 20 milliseconds (ms).</div>
+
+  <q>118. True power in an AC circuit is given by:</q>
+  <div class="options-grid"><span>A) VI</span><span>B) VI sinφ</span><span>C) VI cosφ</span><span>D) I^2 Z</span></div>
+  <a>Ans: C) VI cosφ</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">True (active) power represents the power actually dissipated as heat or converted to mechanical work in a circuit. It is given by: P = V * I * cos φ.</div>
+
+  <q>119. A circuit has R=3Ω, XL=4Ω. Impedance is:</q>
+  <div class="options-grid"><span>A) 7Ω</span><span>B) 1Ω</span><span>C) 5Ω</span><span>D) 12Ω</span></div>
+  <a>Ans: C) 5Ω</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The total impedance magnitude is calculated as: Z = √(R^2 + XL^2) = √(3^2 + 4^2) = √(9 + 16) = √25 = 5Ω.</div>
+
+  <q>120. In an RLC series circuit, if XL > XC, the power factor is:</q>
+  <div class="options-grid"><span>A) Leading</span><span>B) Lagging</span><span>C) Unity</span><span>D) Zero</span></div>
+  <a>Ans: B) Lagging</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">If XL (inductive reactance) is greater than XC (capacitive reactance), the net reactance of the circuit is inductive. This causes the total current to lag behind the applied voltage, resulting in a lagging power factor.</div>
+
+  <!-- CHAPTER 4 -->
+  <h2>4. Network Analysis</h2>
+
+  <q>121. Mesh analysis is based on:</q>
+  <div class="options-grid"><span>A) KCL</span><span>B) KVL</span><span>C) Ohm's Law</span><span>D) Superposition</span></div>
+  <a>Ans: B) KVL</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Mesh analysis is a technique used to find loop currents in a planar circuit. It is based directly on Kirchhoff’s Voltage Law (KVL), where voltage equations are written around closed loops.</div>
+
+  <q>122. Nodal analysis is based on:</q>
+  <div class="options-grid"><span>A) KVL</span><span>B) KCL</span><span>C) Thevenin's Law</span><span>D) Faraday's Law</span></div>
+  <a>Ans: B) KCL</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Nodal analysis is used to find node voltages relative to a reference node. It is based directly on Kirchhoff’s Current Law (KCL), where current equations are written for each non-reference node.</div>
+
+  <q>123. The number of independent KVL equations for a network with 'b' branches and 'n' nodes is:</q>
+  <div class="options-grid"><span>A) b - n + 1</span><span>B) n - 1</span><span>C) b - n</span><span>D) n + 1</span></div>
+  <a>Ans: A) b - n + 1</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">According to network graph theory, the number of independent loops (and thus the number of independent KVL equations required) is given by: b - n + 1.</div>
+
+  <q>124. The number of independent KCL equations (Nodal equations) is:</q>
+  <div class="options-grid"><span>A) b - n + 1</span><span>B) n - 1</span><span>C) b - 1</span><span>D) n</span></div>
+  <a>Ans: B) n - 1</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For a network with 'n' nodes, we designate one node as the reference (ground) node at 0V. This leaves exactly n - 1 independent nodes, requiring n - 1 nodal equations.</div>
+
+  <q>125. In graph theory, a 'tree' of a connected graph contains:</q>
+  <div class="options-grid"><span>A) All nodes, no closed loops</span><span>B) All branches, no nodes</span><span>C) Closed loops</span><span>D) Half the nodes</span></div>
+  <a>Ans: A) All nodes, no closed loops</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">By definition in graph theory, a tree is a connected subgraph that connects all nodes of the graph together without forming any closed loops.</div>
+
+  <q>126. Branches of a tree are called:</q>
+  <div class="options-grid"><span>A) Links</span><span>B) Chords</span><span>C) Twigs</span><span>D) Nodes</span></div>
+  <a>Ans: C) Twigs</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The branches of a graph that are included in the tree are called Twigs. The remaining branches not in the tree are called links or chords.</div>
+
+  <q>127. Branches that are NOT part of a tree are called:</q>
+  <div class="options-grid"><span>A) Twigs</span><span>B) Links or Chords</span><span>C) Roots</span><span>D) Leaves</span></div>
+  <a>Ans: B) Links or Chords</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The branches that are excluded when forming a tree are called Links or Chords. Reconnecting a link to a tree creates a closed loop.</div>
+
+  <q>128. Addition of one link to a tree forms exactly one:</q>
+  <div class="options-grid"><span>A) Supernode</span><span>B) Basic loop (Tie-set)</span><span>C) Cut-set</span><span>D) Node</span></div>
+  <a>Ans: B) Basic loop (Tie-set)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A tree contains no closed paths. When you add exactly one link to a tree, it forms a single closed path consisting of that link and several twigs. This is called a basic loop or a Tie-set.</div>
+
+  <q>129. Z-parameters are also known as:</q>
+  <div class="options-grid"><span>A) Short-circuit parameters</span><span>B) Open-circuit impedance parameters</span><span>C) Transmission parameters</span><span>D) Hybrid parameters</span></div>
+  <a>Ans: B) Open-circuit impedance parameters</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Z-parameters (Impedances) are evaluated by opening the ports one by one (setting I1 = 0 or I2 = 0) to measure the resulting voltages. Hence, they are called open-circuit impedance parameters.</div>
+
+  <q>130. Y-parameters are also known as:</q>
+  <div class="options-grid"><span>A) Open-circuit parameters</span><span>B) Short-circuit admittance parameters</span><span>C) Inverse hybrid</span><span>D) ABCD parameters</span></div>
+  <a>Ans: B) Short-circuit admittance parameters</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Y-parameters (Admittances) are evaluated by short-circuiting the ports one by one (setting V1 = 0 or V2 = 0) to measure the resulting currents. Hence, they are called short-circuit admittance parameters.</div>
+
+  <q>131. In a two-port network, the condition for reciprocity in Z-parameters is:</q>
+  <div class="options-grid"><span>A) Z11 = Z22</span><span>B) Z12 = Z21</span><span>C) Z11 * Z22 - Z12 * Z21 = 1</span><span>D) Z12 = -Z21</span></div>
+  <a>Ans: B) Z12 = Z21</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For any passive, bilateral two-port network, the transfer parameters from Port 1 to Port 2 and vice versa must be equal, which translates to Z12 = Z21.</div>
+
+  <q>132. The condition for a two-port network to be symmetrical in Z-parameters is:</q>
+  <div class="options-grid"><span>A) Z11 = Z22</span><span>B) Z12 = Z21</span><span>C) Z11 = Z12</span><span>D) Z22 = Z21</span></div>
+  <a>Ans: A) Z11 = Z22</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A two-port network is symmetrical if its ports are electrically indistinguishable when viewed from the input or output terminals, which requires: Z11 = Z22.</div>
+
+  <q>133. ABCD parameters are widely used in:</q>
+  <div class="options-grid"><span>A) Filter design</span><span>B) Power transmission lines</span><span>C) Transistor biasing</span><span>D) Oscillator design</span></div>
+  <a>Ans: B) Power transmission lines</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">ABCD parameters (Transmission parameters) relate sending-end voltage and current directly to receiving-end voltage and current, making them ideal for modeling long power transmission lines.</div>
+
+  <q>134. For cascaded two-port networks, which parameters are multiplied?</q>
+  <div class="options-grid"><span>A) Z-parameters</span><span>B) Y-parameters</span><span>C) ABCD parameters</span><span>D) h-parameters</span></div>
+  <a>Ans: C) ABCD parameters</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When two-port networks are connected in cascade, the overall transmission matrix is found simply by multiplying the individual ABCD matrices: [T_total] = [T_A] * [T_B].</div>
+
+  <q>135. For series connection of two-port networks, which parameters are added?</q>
+  <div class="options-grid"><span>A) Z-parameters</span><span>B) Y-parameters</span><span>C) ABCD parameters</span><span>D) h-parameters</span></div>
+  <a>Ans: A) Z-parameters</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When two-port networks are connected in a series configuration, their inputs and outputs are in series, meaning their voltages add up while their currents remain identical. Thus, their individual Z-parameters are added.</div>
+
+  <q>136. For parallel connection of two-port networks, which parameters are added?</q>
+  <div class="options-grid"><span>A) Z-parameters</span><span>B) Y-parameters</span><span>C) ABCD parameters</span><span>D) g-parameters</span></div>
+  <a>Ans: B) Y-parameters</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When two-port networks are connected in parallel, the voltages at the ports are identical, and the total terminal currents are the sum of individual currents. Thus, their individual admittance (Y) parameters are added.</div>
+
+  <q>137. The h-parameters (hybrid) are popular in analyzing:</q>
+  <div class="options-grid"><span>A) Transmission lines</span><span>B) Transformers</span><span>C) BJT (Transistor) circuits</span><span>D) DC generators</span></div>
+  <a>Ans: C) BJT (Transistor) circuits</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Hybrid parameters (h-parameters) are ideal for transistor modeling (like BJTs) because they combine an open-circuit input parameter and a short-circuit output parameter, which match physical transistor testing conditions.</div>
+
+  <q>138. The condition for reciprocity in ABCD parameters is:</q>
+  <div class="options-grid"><span>A) A = D</span><span>B) AD - BC = 1</span><span>C) AD - BC = 0</span><span>D) B = C</span></div>
+  <a>Ans: B) AD - BC = 1</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For a network to be reciprocal under transmission (ABCD) parameters, the determinant of the transmission matrix must be equal to unity: AD - BC = 1.</div>
+
+  <q>139. The condition for symmetry in ABCD parameters is:</q>
+  <div class="options-grid"><span>A) A = D</span><span>B) AD - BC = 1</span><span>C) A = B</span><span>D) C = D</span></div>
+  <a>Ans: A) A = D</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For a two-port network to be symmetrical, the input parameters must look identical from both ports. For ABCD parameters, this requires: A = D.</div>
+
+  <q>140. In Y-parameters, Y11 is defined as:</q>
+  <div class="options-grid"><span>A) I1/V1 with V2=0</span><span>B) V1/I1 with V2=0</span><span>C) I1/V2 with V1=0</span><span>D) V2/I2 with V1=0</span></div>
+  <a>Ans: A) I1/V1 with V2=0 (Short-circuit input admittance)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">From the defining Y-parameter equation: I1 = Y11*V1 + Y12*V2. When we short-circuit the output port (setting V2 = 0), we isolate Y11 as the ratio of input current to input voltage: Y11 = I1 / V1.</div>
+
+  <q>141. Transient state in a circuit is caused by:</q>
+  <div class="options-grid"><span>A) Resistors</span><span>B) Energy storing elements (L, C)</span><span>C) Voltage sources</span><span>D) Wires</span></div>
+  <a>Ans: B) Energy storing elements (L, C)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Resistors dissipate electrical energy immediately as heat. However, energy-storing elements like inductors (L) and capacitors (C) require finite time to charge or discharge, which creates transient states during switching.</div>
+
+  <q>142. An inductor does not allow sudden changes in:</q>
+  <div class="options-grid"><span>A) Voltage</span><span>B) Current</span><span>C) Resistance</span><span>D) Power</span></div>
+  <a>Ans: B) Current</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The voltage across an inductor is v = L * (di/dt). An instantaneous change in current (dt = 0) would require an infinite voltage, which is physically impossible. Therefore, inductors oppose sudden changes in current.</div>
+
+  <q>143. A capacitor does not allow sudden changes in:</q>
+  <div class="options-grid"><span>A) Current</span><span>B) Power</span><span>C) Voltage</span><span>D) Charge polarity instantly</span></div>
+  <a>Ans: C) Voltage</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The current through a capacitor is i = C * (dv/dt). An instantaneous change in voltage (dt = 0) would require an infinite current spike. Therefore, capacitors oppose sudden changes in voltage.</div>
+
+  <q>144. Time constant (τ) of a series RC circuit is:</q>
+  <div class="options-grid"><span>A) R/C</span><span>B) C/R</span><span>C) R*C</span><span>D) 1/(RC)</span></div>
+  <a>Ans: C) R*C</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a series RC transient response, the exponential decay is governed by e^(-t/RC), where the time constant τ = R * C is the time required for the capacitor to charge up to 63.2% of its steady-state value.</div>
+
+  <q>145. Time constant (τ) of a series RL circuit is:</q>
+  <div class="options-grid"><span>A) R/L</span><span>B) L/R</span><span>C) R*L</span><span>D) 1/(RL)</span></div>
+  <a>Ans: B) L/R</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The series RL transient growth/decay is governed by e^(-t / (L/R)), where the time constant is defined as the ratio of inductance to resistance: τ = L/R.</div>
+
+  <q>146. In a DC RC circuit, capacitor acts as an open circuit at:</q>
+  <div class="options-grid"><span>A) t = 0 (initially)</span><span>B) t = ∞ (steady state)</span><span>C) t = RC</span><span>D) It never opens</span></div>
+  <a>Ans: B) t = ∞ (steady state)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In DC steady state (t = ∞), the capacitor is fully charged to the source voltage, and current flow stops completely. Therefore, the capacitor acts as an Open Circuit.</div>
+
+  <q>147. In a DC RL circuit, inductor acts as a short circuit at:</q>
+  <div class="options-grid"><span>A) t = 0</span><span>B) t = ∞</span><span>C) t = L/R</span><span>D) Resonance</span></div>
+  <a>Ans: B) t = ∞ (steady state)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In DC steady state (t = ∞), the current becomes a constant DC value, meaning the rate of change of current di/dt is zero. Since inductor voltage is v = L*(di/dt), the voltage across it is zero, meaning it acts as a Short Circuit.</div>
+
+  <q>148. The Laplace transform of a unit step function u(t) is:</q>
+  <div class="options-grid"><span>A) 1</span><span>B) s</span><span>C) 1/s</span><span>D) 1/s^2</span></div>
+  <a>Ans: C) 1/s</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">By evaluating the Laplace integral for a unit step: L{u(t)} = ∫ [0 to ∞] 1 * e^(-st) dt = [-1/s * e^(-st)] evaluated from 0 to ∞, which equals 1/s.</div>
+
+  <q>149. The Laplace transform of an impulse function δ(t) is:</q>
+  <div class="options-grid"><span>A) 1</span><span>B) 1/s</span><span>C) s</span><span>D) 0</span></div>
+  <a>Ans: A) 1</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Dirac delta function (impulse) exists only at t=0 with infinite height and unit area. Evaluating its Laplace integral yields exactly 1.</div>
+
+  <q>150. Initial value theorem states that f(0+) is equal to:</q>
+  <div class="options-grid"><span>A) lim(s→0) sF(s)</span><span>B) lim(s→∞) sF(s)</span><span>C) lim(s→0) F(s)</span><span>D) lim(s→∞) F(s)</span></div>
+  <a>Ans: B) lim(s→∞) sF(s)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Initial Value Theorem relates the time domain behavior of a system at t approaching zero to the s-domain behavior as s approaches infinity: f(0+) = lim(s→∞) sF(s).</div>
+
+  <q>151. Final value theorem states that f(∞) is equal to:</q>
+  <div class="options-grid"><span>A) lim(s→0) sF(s)</span><span>B) lim(s→∞) sF(s)</span><span>C) lim(s→0) F(s)</span><span>D) lim(s→∞) F(s)</span></div>
+  <a>Ans: A) lim(s→0) sF(s)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The Final Value Theorem relates the steady-state time domain behavior as t approaches infinity to the s-domain behavior as s approaches zero (DC condition): f(∞) = lim(s→0) sF(s).</div>
+
+  <q>152. In s-domain, the impedance of an inductor L with zero initial current is:</q>
+  <div class="options-grid"><span>A) sL</span><span>B) 1/sL</span><span>C) L/s</span><span>D) s/L</span></div>
+  <a>Ans: A) sL</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The time-domain relation is v(t) = L*(di/dt). Applying the Laplace transform with zero initial conditions gives V(s) = L*s*I(s), which means the impedance Z(s) = V(s) / I(s) = sL.</div>
+
+  <q>153. In s-domain, the impedance of a capacitor C is:</q>
+  <div class="options-grid"><span>A) sC</span><span>B) 1/sC</span><span>C) C/s</span><span>D) s/C</span></div>
+  <a>Ans: B) 1/sC</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The time-domain relation is v(t) = 1/C * ∫ i(t) dt. Taking the Laplace transform gives V(s) = (1/sC) * I(s), which means the s-domain impedance is Z(s) = 1/sC.</div>
+
+  <q>154. Driving point impedance of a 1-port network is:</q>
+  <div class="options-grid"><span>A) Z11</span><span>B) V1(s)/I1(s)</span><span>C) V2(s)/I1(s)</span><span>D) Z21</span></div>
+  <a>Ans: B) V1(s)/I1(s)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The driving point impedance is the ratio of s-domain voltage to s-domain current measured at the exact same port where the excitation is applied: Zin(s) = V1(s) / I1(s).</div>
+
+  <q>155. Poles of a transfer function determine the:</q>
+  <div class="options-grid"><span>A) Frequencies where response is zero</span><span>B) Stability and transient response</span><span>C) DC gain only</span><span>D) Input impedance</span></div>
+  <a>Ans: B) Stability and transient response</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Poles are the roots of the denominator of a transfer function H(s). They represent the natural frequencies of the system, which dictate the transient decay rate and overall system stability.</div>
+
+  <q>156. Zeros of a network function are frequencies at which the function becomes:</q>
+  <div class="options-grid"><span>A) Infinite</span><span>B) Zero</span><span>C) 1</span><span>D) Negative</span></div>
+  <a>Ans: B) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Zeros are the roots of the numerator of a transfer function H(s). At these specific frequencies, the transfer function becomes zero, completely blocking the input signal.</div>
+
+  <q>157. A network is stable if all its poles lie in the:</q>
+  <div class="options-grid"><span>A) Right half of s-plane</span><span>B) Left half of s-plane</span><span>C) On the imaginary axis</span><span>D) At the origin</span></div>
+  <a>Ans: B) Left half of s-plane</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">For a network to be stable, its transient response must decay over time (e^-at, where 'a' is a positive real number). This requires the real part of all poles to be negative, meaning they must lie in the Left Half of the s-plane.</div>
+
+  <q>158. Supernode analysis is required when an ideal voltage source is connected between:</q>
+  <div class="options-grid"><span>A) Two reference nodes</span><span>B) A non-reference and a reference node</span><span>C) Two non-reference nodes</span><span>D) Inductor and capacitor</span></div>
+  <a>Ans: C) Two non-reference nodes</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When an ideal voltage source is connected between two non-reference nodes, the current through that branch cannot be determined directly via Ohm's Law. To solve this, we enclose the source and both nodes into a single 'Supernode' and write a combined KCL equation.</div>
+
+  <q>159. Supermesh analysis is required when an ideal current source is shared between:</q>
+  <div class="options-grid"><span>A) Two meshes</span><span>B) A mesh and ground</span><span>C) Two voltage sources</span><span>D) Parallel branches</span></div>
+  <a>Ans: A) Two meshes</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">When a current source is shared between two adjacent meshes, we cannot write standard KVL loop equations individually since the voltage across the current source is unknown. We bypass the branch to form a larger 'Supermesh' loop.</div>
+
+  <q>160. Incidence matrix [A] represents the relation between:</q>
+  <div class="options-grid"><span>A) Loops and branches</span><span>B) Nodes and branches</span><span>C) Loops and nodes</span><span>D) Voltage and current</span></div>
+  <a>Ans: B) Nodes and branches</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In network graph theory, the incidence matrix [A] is a structural matrix that describes the connections between nodes and branches, indicating which branch is connected to which node and in what direction.</div>
+
+  <!-- CHAPTER 5 -->
+  <h2>5. Magnetically Coupled Circuits & Filters</h2>
+
+  <q>161. Mutual inductance (M) exists between two coils when:</q>
+  <div class="options-grid"><span>A) They are physically touching</span><span>B) Magnetic flux of one links the other</span><span>C) They are in series</span><span>D) They have same resistance</span></div>
+  <a>Ans: B) Magnetic flux of one links the other</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Mutual Inductance (M) is the phenomenon where a changing current in one coil induces a voltage in a nearby coil due to the magnetic flux of the first coil cutting across the turns of the second.</div>
+
+  <q>162. The coefficient of coupling (k) is related to L1, L2, and M by:</q>
+  <div class="options-grid"><span>A) k = M / √(L1+L2)</span><span>B) k = M / (L1*L2)</span><span>C) k = M / √(L1*L2)</span><span>D) k = √(L1*L2) / M</span></div>
+  <a>Ans: C) k = M / √(L1*L2)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The coefficient of coupling (k) measures the magnetic flux linkage efficiency. It is mathematically related to mutual and self-inductance by: M = k * √(L1 * L2), which translates to k = M / √(L1 * L2).</div>
+
+  <q>163. The maximum possible value of coupling coefficient (k) is:</q>
+  <div class="options-grid"><span>A) 0</span><span>B) 0.5</span><span>C) 1</span><span>D) Infinity</span></div>
+  <a>Ans: C) 1 (Perfect coupling)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The coupling coefficient (k) ranges from 0 to 1. A value of k = 1 represents perfect coupling, meaning 100% of the magnetic flux produced by one coil links the other without any magnetic leakage.</div>
+
+  <q>164. Two coils in series aiding have equivalent inductance Leq = </q>
+  <div class="options-grid"><span>A) L1 + L2 + M</span><span>B) L1 + L2 + 2M</span><span>C) L1 + L2 - 2M</span><span>D) L1 + L2</span></div>
+  <a>Ans: B) L1 + L2 + 2M</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a series aiding connection, currents flow through both coils such that their individual magnetic fluxes support each other. This results in an equivalent inductance of: Leq = L1 + L2 + 2M.</div>
+
+  <q>165. Two coils in series opposing have equivalent inductance Leq = </q>
+  <div class="options-grid"><span>A) L1 + L2 - 2M</span><span>B) L1 + L2 + 2M</span><span>C) L1 - L2 - M</span><span>D) L1 + L2</span></div>
+  <a>Ans: A) L1 + L2 - 2M</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a series opposing connection, the current flows such that the magnetic fields of the two coils oppose each other. This reduces the overall inductance, giving: Leq = L1 + L2 - 2M.</div>
+
+  <q>166. Dot convention is used to determine:</q>
+  <div class="options-grid"><span>A) Current magnitude</span><span>B) Voltage magnitude</span><span>C) Polarity of mutually induced voltage</span><span>D) Coil resistance</span></div>
+  <a>Ans: C) Polarity of mutually induced voltage</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The dot convention is a standard marking system used to easily determine the relative polarities of mutually induced voltages in coupled coils without needing to know the physical winding directions.</div>
+
+  <q>167. A filter is a circuit designed to:</q>
+  <div class="options-grid"><span>A) Amplify signals</span><span>B) Rectify AC to DC</span><span>C) Pass specific frequencies and block others</span><span>D) Generate oscillations</span></div>
+  <a>Ans: C) Pass specific frequencies and block others</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An electrical filter is a frequency-selective network designed to allow signals within a specified frequency band (passband) to go through while attenuating or blocking all other frequencies (stopband).</div>
+
+  <q>168. A Low Pass Filter (LPF) allows frequencies:</q>
+  <div class="options-grid"><span>A) Above cut-off frequency</span><span>B) Below cut-off frequency</span><span>C) Between two frequencies</span><span>D) Only at resonance</span></div>
+  <a>Ans: B) Below cut-off frequency</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A Low Pass Filter (LPF) permits low frequencies (including DC, 0 Hz) below its specific cut-off frequency (fc) to pass with minimal loss while heavily attenuating frequencies above fc.</div>
+
+  <q>169. A High Pass Filter (HPF) allows frequencies:</q>
+  <div class="options-grid"><span>A) Below cut-off frequency (fc)</span><span>B) Above cut-off frequency (fc)</span><span>C) DC only</span><span>D) A specific narrow band</span></div>
+  <a>Ans: B) Above cut-off frequency (fc)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A High Pass Filter (HPF) blocks low-frequency components (including DC) below its cut-off frequency (fc) and allows high-frequency signals above fc to pass through.</div>
+
+  <q>170. A Band Pass Filter (BPF) passes frequencies:</q>
+  <div class="options-grid"><span>A) Below lower cut-off</span><span>B) Above upper cut-off</span><span>C) Between lower and upper cut-off</span><span>D) Outside a certain band</span></div>
+  <a>Ans: C) Between lower and upper cut-off</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A Band Pass Filter (BPF) allows a specific band of frequencies situated between a lower cut-off frequency (fc1) and an upper cut-off frequency (fc2) to pass, while blocking all outer frequencies.</div>
+
+  <q>171. A Band Stop Filter (BSF) is also known as:</q>
+  <div class="options-grid"><span>A) Band Reject Filter</span><span>B) Notch Filter</span><span>C) Both A and B</span><span>D) All pass filter</span></div>
+  <a>Ans: C) Both A and B</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A Band Stop Filter blocks a specific range of frequencies. It is commonly referred to as a Band Reject Filter, or a Notch Filter if the bandwidth being blocked is extremely narrow.</div>
+
+  <q>172. In an ideal filter, the attenuation in the passband is:</q>
+  <div class="options-grid"><span>A) Infinite</span><span>B) Zero</span><span>C) 3 dB</span><span>D) -3 dB</span></div>
+  <a>Ans: B) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An ideal filter should pass desired signals with absolutely no attenuation or loss. Therefore, the passband attenuation (α) must be exactly Zero (0 dB).</div>
+
+  <q>173. The frequency at which the output power falls to half of its max value is called:</q>
+  <div class="options-grid"><span>A) Resonant frequency</span><span>B) Cut-off frequency</span><span>C) Center frequency</span><span>D) Stop frequency</span></div>
+  <a>Ans: B) Cut-off frequency (-3dB frequency)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The cut-off frequency (fc) represents the transition boundary where the output power drops to exactly half of its maximum value, which corresponds to a 3 dB reduction in output voltage (70.7% amplitude).</div>
+
+  <q>174. A constant-k low pass filter is composed of:</q>
+  <div class="options-grid"><span>A) Series L, Shunt C</span><span>B) Series C, Shunt L</span><span>C) Series R, Shunt C</span><span>D) Series L, Shunt R</span></div>
+  <a>Ans: A) Series L, Shunt C</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">At low frequencies, an inductor has low reactance (short) and a capacitor has high reactance (open), allowing signals to pass. Thus, a series Inductor (L) and shunt Capacitor (C) combination forms a Low Pass Filter.</div>
+
+  <q>175. A constant-k high pass filter is composed of:</q>
+  <div class="options-grid"><span>A) Series L, Shunt C</span><span>B) Series C, Shunt L</span><span>C) Series L, Shunt L</span><span>D) Series C, Shunt C</span></div>
+  <a>Ans: B) Series C, Shunt L</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A capacitor blocks DC/low frequencies (acting as an open) and passes high frequencies, while a shunt inductor shunts low frequencies to ground. Thus, a series Capacitor (C) and shunt Inductor (L) form a High Pass Filter.</div>
+
+  <q>176. The property Z1*Z2 = R0^2 applies to which filter?</q>
+  <div class="options-grid"><span>A) m-derived filter</span><span>B) Constant-k filter</span><span>C) Active filter</span><span>D) Butterworth filter</span></div>
+  <a>Ans: B) Constant-k filter (where R0 is design impedance)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Constant-k filters are designed based on the condition that the product of the series arm impedance (Z1) and shunt arm impedance (Z2) is a constant (k^2 = R0^2) that is completely independent of frequency.</div>
+
+  <q>177. m-derived filters are designed to solve which problem of constant-k filters?</q>
+  <div class="options-grid"><span>A) Slow attenuation rate at cut-off</span><span>B) High cost</span><span>C) Size issues</span><span>D) Low power handling</span></div>
+  <a>Ans: A) Slow attenuation rate at cut-off</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Constant-k filters have a very slow transition from the passband to the stopband. The m-derived filter solves this by incorporating a parameter 'm' to create a much sharper cut-off transition.</div>
+
+  <q>178. Active filters use operational amplifiers because they provide:</q>
+  <div class="options-grid"><span>A) Inductance</span><span>B) Gain and avoid loading effects</span><span>C) Pure resistance</span><span>D) Higher voltage</span></div>
+  <a>Ans: B) Gain and avoid loading effects</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Op-Amps in active filters provide high input impedance (preventing loading on preceding stages), low output impedance, and adjustable signal gain. This eliminates the need for bulky inductors.</div>
+
+  <q>179. Passive filters are made up of:</q>
+  <div class="options-grid"><span>A) R, L, C</span><span>B) Op-amps, R, C</span><span>C) Transistors</span><span>D) Diodes</span></div>
+  <a>Ans: A) R, L, C</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Passive filters are constructed entirely using passive components: Resistors (R), Inductors (L), and Capacitors (C). They require no external DC power supply to operate.</div>
+
+  <q>180. The decibel (dB) is a unit of:</q>
+  <div class="options-grid"><span>A) Voltage</span><span>B) Current</span><span>C) Power ratio or Attenuation</span><span>D) Frequency</span></div>
+  <a>Ans: C) Power ratio or Attenuation</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The decibel (dB) is a logarithmic unit used to express the ratio of two levels of power, voltage, or current. It is commonly used to quantify attenuation, gain, and loss in filter networks.</div>
+
+  <q>181. For an ideal transformer, the coupling coefficient k is:</q>
+  <div class="options-grid"><span>A) 0</span><span>B) 0.5</span><span>C) 1.0</span><span>D) 1.5</span></div>
+  <a>Ans: C) 1.0</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">An ideal transformer assumes zero magnetic flux leakage, meaning all of the flux generated by the primary winding perfectly links the secondary winding. Thus, k is exactly 1.0.</div>
+
+  <q>182. A transformer transfers electrical energy from one circuit to another without changing:</q>
+  <div class="options-grid"><span>A) Voltage</span><span>B) Current</span><span>C) Frequency</span><span>D) Impedance</span></div>
+  <a>Ans: C) Frequency</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">While a transformer steps voltage and current levels up or down through electromagnetic induction, it operates on a constant magnetic flux cycle, meaning the AC frequency remains unchanged.</div>
+
+  <q>183. Mutual inductance M is measured in:</q>
+  <div class="options-grid"><span>A) Farads</span><span>B) Ohms</span><span>C) Henrys</span><span>D) Webers</span></div>
+  <a>Ans: C) Henrys</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Just like self-inductance (L), mutual inductance (M) represents opposition to changing currents via magnetic induction. Its standard SI unit is the Henry (H).</div>
+
+  <q>184. If the physical distance between two coupled coils is increased, M will:</q>
+  <div class="options-grid"><span>A) Increase</span><span>B) Decrease</span><span>C) Remain constant</span><span>D) Become infinite</span></div>
+  <a>Ans: B) Decrease</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Increasing the physical distance between coils reduces the amount of shared magnetic flux. This increases magnetic leakage and lowers the coupling coefficient (k), thereby decreasing the mutual inductance (M).</div>
+
+  <q>185. A cut-off frequency is also called the:</q>
+  <div class="options-grid"><span>A) Break frequency</span><span>B) Half-power frequency</span><span>C) Corner frequency</span><span>D) All of the above</span></div>
+  <a>Ans: D) All of the above</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In network analysis and frequency response plotting (like Bode plots), the cut-off frequency is known by several interchangeable terms: break frequency, corner frequency, and half-power frequency.</div>
+
+  <q>186. In a T-section filter, the series arms are:</q>
+  <div class="options-grid"><span>A) Z1</span><span>B) Z1/2</span><span>C) Z2</span><span>D) 2*Z2</span></div>
+  <a>Ans: B) Z1/2</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A symmetrical T-section filter is split into two equal series arms. The total series impedance Z1 is divided equally between these two branches, making each series arm Z1/2.</div>
+
+  <q>187. In a π-section filter, the shunt arms are:</q>
+  <div class="options-grid"><span>A) Z2</span><span>B) Z2/2</span><span>C) 2*Z2</span><span>D) Z1</span></div>
+  <a>Ans: C) 2*Z2</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In a symmetrical π-section filter, the shunt impedance (Z2) is split into two parallel branches. For the parallel combination of the two ends to match the network, each shunt branch must have an impedance of 2*Z2.</div>
+
+  <q>188. Attenuation (α) in the passband of an ideal filter is:</q>
+  <div class="options-grid"><span>A) Infinity</span><span>B) 1 Neper</span><span>C) Zero</span><span>D) Variable</span></div>
+  <a>Ans: C) Zero</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The passband is the range of frequencies that should pass through the filter completely unaltered. Thus, an ideal filter has zero attenuation (α = 0) in its passband.</div>
+
+  <q>189. Phase shift (β) in the stopband of a constant-k filter is:</q>
+  <div class="options-grid"><span>A) Zero</span><span>B) π or -π radians</span><span>C) π/2 radians</span><span>D) Infinity</span></div>
+  <a>Ans: B) π or -π radians</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In the stopband of a constant-k filter, the transmission phase shift remains constant at exactly 180° out of phase, which is represented as π or -π radians.</div>
+
+  <q>190. Characteristic impedance (Z0) of a symmetrical network is:</q>
+  <div class="options-grid"><span>A) √(Z_oc * Z_sc)</span><span>B) Z_oc / Z_sc</span><span>C) Z_sc / Z_oc</span><span>D) Z_oc + Z_sc</span></div>
+  <a>Ans: A) √(Z_oc * Z_sc)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">The characteristic impedance (Z0) of a symmetrical network is defined as the geometric mean of its open-circuit impedance (Z_oc) and short-circuit impedance (Z_sc): Z0 = √(Z_oc * Z_sc).</div>
+
+  <q>191. The primary purpose of a terminating half-section (m-derived) is to:</q>
+  <div class="options-grid"><span>A) Increase gain</span><span>B) Provide constant characteristic impedance</span><span>C) Increase bandwidth</span><span>D) Decrease cost</span></div>
+  <a>Ans: B) Provide constant characteristic impedance</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">In filter cascading, terminating half-sections (m-derived, typically m=0.6) are placed at the inputs and outputs to provide a nearly flat characteristic impedance across the passband, ensuring excellent impedance matching and minimal reflection losses.</div>
+
+  <q>192. Magnetic coupling is utilized effectively in:</q>
+  <div class="options-grid"><span>A) Capacitors</span><span>B) Transformers</span><span>C) Resistors</span><span>D) Diodes</span></div>
+  <a>Ans: B) Transformers</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Transformers are designed to transfer electrical energy from one winding to another entirely through the medium of mutual magnetic flux coupling.</div>
+
+  <q>193. Two coils have L1=4H, L2=9H and k=0.5. What is M?</q>
+  <div class="options-grid"><span>A) 3H</span><span>B) 6H</span><span>C) 2H</span><span>D) 18H</span></div>
+  <a>Ans: A) 3H</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Using the mutual inductance coupling formula: M = k * √(L1 * L2) = 0.5 * √(4 * 9) = 0.5 * √36 = 0.5 * 6 = 3H.</div>
+
+  <q>194. If currents enter the dotted terminals of both coils, the mutually induced voltages are:</q>
+  <div class="options-grid"><span>A) Negative</span><span>B) Positive (Aiding)</span><span>C) Zero</span><span>D) Infinity</span></div>
+  <a>Ans: B) Positive (Aiding)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">According to the dot convention, if the currents enter the dotted terminals of both coils, the mutually induced magnetic fluxes will align in the same direction, aiding the self-induced voltages.</div>
+
+  <q>195. Filters are widely used in:</q>
+  <div class="options-grid"><span>A) DC circuits</span><span>B) Communication & Audio systems</span><span>C) Batteries</span><span>D) Lighting circuits</span></div>
+  <a>Ans: B) Communication & Audio systems</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Filters are highly essential in communication, radio, and audio networks to isolate desired signals, filter out high-frequency noise, and reject interference.</div>
+
+  <q>196. An m-derived filter has an m value strictly between:</q>
+  <div class="options-grid"><span>A) 0 and 1</span><span>B) 1 and 2</span><span>C) -1 and 0</span><span>D) 10 and 100</span></div>
+  <a>Ans: A) 0 and 1</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">To satisfy the physical realizability of the filter components (ensuring positive values for L and C), the design parameter 'm' must be strictly bounded between the limits of 0 and 1.</div>
+
+  <q>197. To design a Band Pass Filter, one can cascade:</q>
+  <div class="options-grid"><span>A) Two LPFs</span><span>B) Two HPFs</span><span>C) An LPF and an HPF</span><span>D) An LPF and a BSF</span></div>
+  <a>Ans: C) An LPF and an HPF (with overlapping passbands)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">A Band Pass Filter can be formed by cascading a High Pass Filter (to block low frequencies) with a Low Pass Filter (to block high frequencies) such that their passband regions overlap.</div>
+
+  <q>198. Active filters DO NOT use which component?</q>
+  <div class="options-grid"><span>A) Resistors</span><span>B) Capacitors</span><span>C) Inductors</span><span>D) Op-Amps</span></div>
+  <a>Ans: C) Inductors (Bulky, so they are avoided)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Active filters use Op-Amps, resistors, and capacitors to simulate inductive responses. This allows them to avoid using inductors, which are physically heavy, bulky, and expensive.</div>
+
+  <q>199. Insertion loss of a filter is measured in:</q>
+  <div class="options-grid"><span>A) Volts</span><span>B) Ohms</span><span>C) Decibels (dB)</span><span>D) Henrys</span></div>
+  <a>Ans: C) Decibels (dB)</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Insertion loss measures the signal power reduction caused by inserting the filter into the transmission line. It is quantified on a logarithmic scale in Decibels (dB).</div>
+
+  <q>200. The relation between Neper (Np) and Decibel (dB) is roughly:</q>
+  <div class="options-grid"><span>A) 1 Np = 8.686 dB</span><span>B) 1 dB = 8.686 Np</span><span>C) 1 Np = 1 dB</span><span>D) 1 Np = 10 dB</span></div>
+  <a>Ans: A) 1 Np = 8.686 dB</a>
+  <button class="sol-btn">Show Solution</button>
+  <div class="sol-box">Neper (natural log scale) and Decibel (base-10 log scale) are both units of attenuation. They are related by the constant ratio: 1 Neper ≈ 8.686 dB.</div>
+
+</div>
+
+<!-- Floating AI Chat Widget -->
+<button id="ai-chat-fab">💬 Ask AI Teacher</button>
+<div id="ai-chat-widget">
+  <div id="ai-chat-header">
+    <span>AI Teacher ✨</span>
+    <span class="close-icon" id="close-chat">✖</span>
+  </div>
+  <div id="ai-chat-messages">
+    <div class="chat-msg ai">Hello! I'm your AI Professor. Have a doubt about an electrical circuit concept? Ask me!</div>
+  </div>
+  <div id="ai-chat-input-area">
+    <input type="text" id="ai-chat-input" placeholder="Type your question here...">
+    <button id="ai-chat-send">Send</button>
+  </div>
+</div>
+
+<!-- Interactive Show/Hide Toggle Logic script -->
+<script>
+  const apiKey = ""; // API key is handled automatically by the environment
+
+  // Helper to format AI response text (convert newlines to breaks, bolding)
+  function formatAIResponse(text) {
+    return text.replace(/\n/g, '<br>')
+               .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+               .replace(/\*(.*?)\*/g, '<i>$1</i>');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Standard Show/Hide Solution Logic
+    const buttons = document.querySelectorAll('.sol-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const solBox = button.nextElementSibling;
+        if (solBox.style.display === 'none' || solBox.style.display === '') {
+          solBox.style.display = 'block';
+          button.textContent = 'Hide Solution';
+          button.style.border = '1px solid #ff9800';
+          button.style.color = '#ff9800';
+        } else {
+          solBox.style.display = 'none';
+          button.textContent = 'Show Solution';
+          button.style.border = '1px dashed #00ffff';
+          button.style.color = '#00ffff';
+        }
+      });
+    });
+
+    const solBoxes = document.querySelectorAll('.sol-box');
+    solBoxes.forEach(solBox => {
+        // Create the deep dive button
+        const aiBtn = document.createElement('button');
+        aiBtn.className = 'ai-btn';
+        aiBtn.innerHTML = 'Explain Deeper with AI ✨';
+        
+        // Create the response container
+        const aiBox = document.createElement('div');
+        aiBox.className = 'ai-box';
+        
+        // Insert right after the standard solution box
+        solBox.after(aiBtn);
+        aiBtn.after(aiBox);
+
+        // API Calling Logic for specific question context
+        aiBtn.addEventListener('click', async () => {
+            if (aiBox.style.display === 'block') {
+                aiBox.style.display = 'none';
+                aiBtn.innerHTML = 'Explain Deeper with AI ✨';
+                return;
+            }
+            
+            aiBtn.innerHTML = 'Hide AI Explanation ✖';
+            aiBox.style.display = 'block';
+            
+            // Avoid re-fetching if content is already loaded
+            if(aiBox.innerHTML && !aiBox.innerHTML.includes('AI is thinking')) {
+                return; 
+            }
+
+            aiBox.innerHTML = '<em>AI is thinking... 🧠</em>';
+
+            // Gather context from the DOM (traverse backward from button)
+            let prevNode = aiBtn.previousElementSibling;
+            let qText, optText, ansText, basicSolText;
+            
+            while(prevNode) {
+                if (prevNode.classList.contains('sol-box') && !basicSolText) basicSolText = prevNode.innerText;
+                if (prevNode.tagName.toLowerCase() === 'a' && !ansText) ansText = prevNode.innerText;
+                if (prevNode.classList.contains('options-grid') && !optText) optText = prevNode.innerText;
+                if (prevNode.tagName.toLowerCase() === 'q' && !qText) {
+                    qText = prevNode.innerText;
+                    break; // Found the question, stop traversing
+                }
+                prevNode = prevNode.previousElementSibling;
+            }
+
+            const prompt = `Please explain the following electrical engineering MCQ in more detail. Provide an easy-to-understand analogy suitable for a diploma engineering student.\n\nQuestion: ${qText}\nOptions: ${optText}\nCorrect Answer: ${ansText}\nBasic Solution: ${basicSolText}\n\nMake the explanation engaging, detailed, and directly address why the other options might be incorrect. Keep formatting simple (no markdown headings).`;
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        systemInstruction: { parts: [{ text: "You are an expert electrical engineering professor helping a student on a digital smart board. Explain concepts clearly, concisely, and use analogies. Format text cleanly without markdown headings, use bolding for emphasis." }] }
+                    })
+                });
+                const result = await response.json();
+                if (result.candidates && result.candidates[0].content?.parts?.[0]?.text) {
+                     aiBox.innerHTML = formatAIResponse(result.candidates[0].content.parts[0].text);
+                } else {
+                     aiBox.innerHTML = "<em>Sorry, the AI teacher is busy right now.</em>";
+                }
+            } catch (e) {
+                aiBox.innerHTML = "<em>Error connecting to AI. Please try again.</em>";
+            }
+        });
+    });
+
+    const fab = document.getElementById('ai-chat-fab');
+    const widget = document.getElementById('ai-chat-widget');
+    const closeBtn = document.getElementById('close-chat');
+    const sendBtn = document.getElementById('ai-chat-send');
+    const inputField = document.getElementById('ai-chat-input');
+    const messagesArea = document.getElementById('ai-chat-messages');
+
+    let chatHistory = [];
+
+    fab.addEventListener('click', () => {
+        widget.style.display = 'flex';
+        fab.style.display = 'none';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        widget.style.display = 'none';
+        fab.style.display = 'block';
+    });
+
+    async function handleChatSend() {
+        const text = inputField.value.trim();
+        if (!text) return;
+
+        // Display user message
+        inputField.value = '';
+        appendMessage(text, 'user');
+
+        // Add to multi-turn history
+        chatHistory.push({ role: 'user', parts: [{ text: text }] });
+
+        const typingId = 'typing-' + Date.now();
+        appendMessage('Typing...', 'ai', typingId);
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: chatHistory,
+                    systemInstruction: { parts: [{ text: "You are an expert electrical engineering professor. Answer the student's doubts clearly, concisely, and accurately. Act as a chatbot. Do not use complex markdown formatting like headers, just simple bolding and line breaks." }] }
+                })
+            });
+            
+            const result = await response.json();
+            document.getElementById(typingId)?.remove();
+
+            if (result.candidates && result.candidates[0].content?.parts?.[0]?.text) {
+                const aiText = result.candidates[0].content.parts[0].text;
+                appendMessage(formatAIResponse(aiText), 'ai');
+                // Save model response to history
+                chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
+            } else {
+                appendMessage("<em>Oops! Something went wrong.</em>", 'ai');
+            }
+        } catch (e) {
+            document.getElementById(typingId)?.remove();
+            appendMessage("<em>Error connecting to AI.</em>", 'ai');
+        }
+    }
+
+    function appendMessage(text, sender, id = null) {
+        const div = document.createElement('div');
+        div.className = `chat-msg ${sender}`;
+        if(id) div.id = id;
+        div.innerHTML = text;
+        messagesArea.appendChild(div);
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', handleChatSend);
+    inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleChatSend();
+    });
+  });
+</script>
+
+</body>
+</html>
