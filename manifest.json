@@ -1,0 +1,83 @@
+{
+  "name": "Polytechnic Hub",
+  "short_name": "PolyHub",
+  "description": "Free Study Materials, Free Courses, Test Series, Polytechnic Updates, Scholarships, Notice Board and Syllabus for Polytechnic & Diploma Students.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050B14",
+  "theme_color": "#0A192F",
+  "orientation": "portrait",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Free Courses",
+      "short_name": "Courses",
+      "description": "Access free study materials and courses.",
+      "url": "./freecourses.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Test Series",
+      "short_name": "Tests",
+      "description": "Attempt test series and mock exams.",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Scholarship",
+      "short_name": "Scholarship",
+      "description": "Find and apply for scholarships.",
+      "url": "./scholarship.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Notice Board",
+      "short_name": "Notices",
+      "description": "Check the latest polytechnic notices.",
+      "url": "./notice_board.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "education",
+    "productivity",
+    "books",
+    "utilities"
+  ],
+  "screenshots": []
+}
