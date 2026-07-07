@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Polytechnic Hub - Helping Polytechnic & Diploma Students with Free Study Materials, Courses, and Updates.">
+    <meta name="theme-color" content="#0A192F">
+    <title>About Us | Polytechnic Hub</title>
+    
+    <style>
+        /* ==========================================================================
+           CSS Variables & Premium Theming (Dark Blue + Black Default)
+           ========================================================================== */
+        :root {
+            --bg-color: #050B14;
+            --bg-gradient: linear-gradient(135deg, #0A192F 0%, #000000 100%);
+            --header-bg: rgba(4, 10, 20, 0.85); 
+            --card-bg: linear-gradient(145deg, rgba(27, 42, 65, 0.95) 0%, rgba(17, 34, 64, 0.85) 100%);
+            
+            --text-main: #FFFFFF;
+            --text-sec: #B8C5D6;
+            --primary: #00BFFF;
+            --primary-hover: #0099CC;
+            
+            --radius: 16px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8);
+            --card-shadow-hover: 0 25px 50px -10px rgba(0, 191, 255, 0.25);
+            --border-top: rgba(255, 255, 255, 0.1);
+            --border-left: rgba(255, 255, 255, 0.05);
+            --border-subtle: rgba(255, 255, 255, 0.05);
+        }
+
+        body.light-mode {
+            --bg-color: #FFFFFF;
+            --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+            --header-bg: rgba(248, 250, 252, 0.85);
+            --card-bg: linear-gradient(145deg, #FFFFFF 0%, #F1F5F9 100%);
+            
+            --text-main: #111827;
+            --text-sec: #6B7280;
+            --primary: #1565C0;
+            --primary-hover: #0D47A1;
+            
+            --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1);
+            --card-shadow-hover: 0 25px 50px -10px rgba(21, 101, 192, 0.3);
+            --border-top: #FFFFFF;
+            --border-left: rgba(255, 255, 255, 0.8);
+            --border-subtle: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ==========================================================================
+           Base & Reset
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-gradient);
+            background-color: var(--bg-color);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; object-fit: contain; } /* Globally prevent stretch/crop */
+
+        .container {
+            width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 5%;
+        }
+
+        /* ==========================================================================
+           Header (Glassmorphism & Sticky - NO SVGs)
+           ========================================================================== */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--header-bg); backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-subtle);
+            transition: background var(--transition);
+        }
+
+        .nav-container {
+            display: flex; justify-content: space-between; align-items: center; height: 76px;
+        }
+
+        .nav-left, .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+        .text-icon-btn {
+            background: none; border: none; color: var(--text-main);
+            cursor: pointer; padding: 8px; font-size: 1.5rem; line-height: 1;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.2s;
+        }
+        .text-icon-btn:hover { transform: scale(1.1); }
+
+        .back-link {
+            display: flex; align-items: center; gap: 6px;
+            color: var(--text-sec); font-weight: 600; font-size: 1rem;
+            transition: color var(--transition); margin-right: 10px; cursor: pointer;
+            background: none; border: none; font-family: inherit;
+        }
+        .back-link:hover { color: var(--primary); }
+
+        .logo-group {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 1.2rem;
+        }
+        .logo-img { width: 40px; height: 40px; }
+
+        /* ==========================================================================
+           Hero Section
+           ========================================================================== */
+        .hero {
+            padding: 130px 0 60px; text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800;
+            margin-bottom: 1rem; line-height: 1.1;
+        }
+
+        .hero p {
+            color: var(--text-sec); font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 800px; margin-inline: auto;
+        }
+
+        /* ==========================================================================
+           Premium 3D Card Base
+           ========================================================================== */
+        .premium-card {
+            background: var(--card-bg); border-radius: var(--radius);
+            padding: 2.5rem 2rem; 
+            box-shadow: var(--card-shadow);
+            border-top: 1px solid var(--border-top); border-left: 1px solid var(--border-left);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d; transform: perspective(1000px);
+            transition: box-shadow var(--transition), border-color var(--transition);
+            will-change: transform;
+        }
+        .premium-card:hover {
+            box-shadow: var(--card-shadow-hover); border-color: rgba(0, 191, 255, 0.4); z-index: 2;
+        }
+
+        .section-title {
+            font-size: 2rem; font-weight: 700; margin-bottom: 2rem; text-align: center;
+            color: var(--text-main); transform: translateZ(20px);
+        }
+
+        /* ==========================================================================
+           Founder Section (Strict Image Rules)
+           ========================================================================== */
+        .founder-section { margin-bottom: 5rem; text-align: center; }
+
+        .founder-card {
+            max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .founder-img-wrapper {
+            width: 220px; height: 220px; border-radius: 50%;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; background: rgba(255,255,255,0.02);
+            margin-bottom: 1.5rem;
+            transition: transform var(--transition), box-shadow var(--transition);
+            transform: translateZ(30px);
+        }
+        .founder-card:hover .founder-img-wrapper {
+            transform: translateZ(40px) scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 191, 255, 0.7);
+        }
+
+        .founder-img-wrapper img {
+            width: 100%; height: 100%;
+            object-fit: contain; /* STRICT RULE: Never crop, stretch, or zoom */
+        }
+
+        .founder-name { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.2rem; transform: translateZ(20px); }
+        .founder-title { color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 1.5rem; transform: translateZ(20px); }
+        
+        .founder-about {
+            color: var(--text-sec); font-size: 1.05rem; line-height: 1.8;
+            transform: translateZ(15px); text-align: justify;
+        }
+
+        /* ==========================================================================
+           Mission & Vision
+           ========================================================================== */
+        .mv-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; margin-bottom: 5rem;
+        }
+
+        .mission-list {
+            list-style: none; text-align: left; margin-top: 1.5rem;
+            transform: translateZ(15px);
+        }
+        .mission-list li {
+            margin-bottom: 0.8rem; font-size: 1.05rem; color: var(--text-sec);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .mission-list li::before {
+            content: '✓'; color: var(--primary); font-weight: bold; font-size: 1.2rem;
+        }
+
+        .vision-text {
+            font-size: 1.5rem; font-weight: 600; color: var(--primary);
+            margin-top: 2rem; line-height: 1.5; transform: translateZ(15px);
+        }
+
+        /* ==========================================================================
+           Why Choose Us (Features)
+           ========================================================================== */
+        .features-section { margin-bottom: 5rem; }
+        
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(0, 191, 255, 0.1); color: var(--text-main);
+            padding: 1.5rem 1rem; border-radius: 12px; text-align: center;
+            font-weight: 600; border: 1px solid rgba(0, 191, 255, 0.2);
+            transition: all var(--transition); transform-style: preserve-3d;
+        }
+        .feature-tag:hover {
+            background: var(--primary); color: #FFFFFF; transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
+        }
+
+        /* ==========================================================================
+           Contact & Follow Us (Strict Local Images)
+           ========================================================================== */
+        .contact-section { margin-bottom: 5rem; }
+
+        .contact-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            text-decoration: none; color: inherit;
+        }
+
+        .contact-card img {
+            width: 80px; height: 80px; object-fit: contain; margin-bottom: 1.2rem;
+            border-radius: 16px; background: transparent; transform: translateZ(30px);
+            transition: transform var(--transition);
+        }
+        .contact-card:hover img { transform: translateZ(40px) scale(1.1); }
+
+        .contact-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; transform: translateZ(20px); }
+        .contact-card p { color: var(--text-sec); transform: translateZ(15px); font-weight: 500; }
+
+        /* ==========================================================================
+           Footer (No SVGs)
+           ========================================================================== */
+        footer {
+            background: var(--header-bg); padding: 5rem 0 2rem;
+            border-top: 1px solid var(--border-subtle); backdrop-filter: blur(16px);
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem; margin-bottom: 4rem;
+        }
+        .footer-brand .logo-img { width: 70px; height: 70px; margin-bottom: 1.5rem; }
+        .footer-brand p { color: var(--text-sec); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .footer-col h4 { font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--text-main); font-weight: 700; }
+        .footer-col a, .footer-col p { color: var(--text-sec); margin-bottom: 1rem; display: block; font-size: 0.95rem; transition: color var(--transition); }
+        .footer-col a:hover { color: var(--primary); }
+        
+        .footer-social-links { display: flex; gap: 15px; margin-top: 1rem; }
+        .footer-social-img {
+            width: 36px; height: 36px; border-radius: 8px; object-fit: contain;
+            transition: transform var(--transition);
+        }
+        .footer-social-img:hover { transform: translateY(-4px); }
+
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-subtle); color: var(--text-sec); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Header (No SVGs) -->
+    <header id="mainHeader">
+        <div class="container nav-container">
+            <div class="nav-left">
+                <button class="text-icon-btn" aria-label="Open Menu">☰</button>
+                <button class="back-link" onclick="window.location.href='index.html'" aria-label="Go Back">
+                    ← Back
+                </button>
+                <a href="index.html" class="logo-group">
+                    <img src="logo.png" alt="Polytechnic Hub Logo" class="logo-img" onerror="this.style.display='none'">
+                    <span style="display: none; @media(min-width: 650px){display:inline;}">Polytechnic Hub</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <button class="text-icon-btn" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode">🌙</button>
+                <button class="text-icon-btn" aria-label="Profile Account">👤</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="container hero">
+            <h1>About Polytechnic Hub</h1>
+            <p>Helping Polytechnic & Diploma Students with Free Study Materials, Courses, Test Series, Scholarships, Syllabus, Notices and Latest Updates.</p>
+        </section>
+
+        <!-- Founder Section -->
+        <section class="container founder-section">
+            <div class="premium-card founder-card js-tilt">
+                <div class="founder-img-wrapper">
+                    <!-- Strict Rule: Full image, no crop, original aspect ratio -->
+                    <img src="my.webp" alt="Lalan Kumar - Founder of Polytechnic Hub" onerror="this.style.display='none'">
+                </div>
+                <h2 class="founder-name">Lalan Kumar</h2>
+                <div class="founder-title">Founder of Polytechnic Hub</div>
+                <div class="founder-about">
+                    Welcome to Polytechnic Hub! This platform was created with a single vision: to help every Polytechnic and Diploma student achieve academic excellence without any financial burden. We understand the challenges students face in finding quality resources. That is why Polytechnic Hub provides 100% Free Study Materials, Free Courses, Test Series, Semester-wise and Branch-wise Notes, Previous Year Questions, Polytechnic Updates, Scholarships, Notices, and complete Syllabus details all in one place.
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Vision Section -->
+        <section class="container mv-grid">
+            <div class="premium-card js-tilt" style="text-align: center;">
+                <h2 class="section-title">Our Mission</h2>
+                <ul class="mission-list">
+                    <li>Free Education for All</li>
+                    <li>Promote Digital Learning</li>
+                    <li>Easy Access to Resources</li>
+                    <li>High Quality Study Materials</li>
+                    <li>Help Every Polytechnic Student</li>
+                </ul>
+            </div>
+            
+            <div class="premium-card js-tilt" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                <h2 class="section-title" style="margin-bottom: 0;">Our Vision</h2>
+                <div class="vision-text">
+                    "Become India's Best Free Polytechnic Learning Platform."
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="container features-section">
+            <h2 class="section-title" style="margin-bottom: 3rem;">Why Choose Polytechnic Hub</h2>
+            <div class="features-grid">
+                <div class="feature-tag">100% Free Notes</div>
+                <div class="feature-tag">Semester Wise Study Material</div>
+                <div class="feature-tag">Branch Wise Notes</div>
+                <div class="feature-tag">Test Series</div>
+                <div class="feature-tag">Scholarships</div>
+                <div class="feature-tag">Polytechnic Updates</div>
+                <div class="feature-tag">Notice Board</div>
+                <div class="feature-tag">Syllabus</div>
+                <div class="feature-tag">Mobile Friendly</div>
+                <div class="feature-tag">Fast Learning</div>
+                <div class="feature-tag">Regular Updates</div>
+            </div>
+        </section>
+
+        <!-- Contact & Follow Us (Strictly Local Uploaded Images) -->
+        <section class="container contact-section">
+            <h2 class="section-title" style="margin-bottom: 3rem;">Connect With Us</h2>
+            <div class="contact-grid">
+                
+                <!-- Phone -->
+                <a href="tel:+919296783086" class="premium-card contact-card js-tilt">
+                    <img src="phone.png" alt="Phone" onerror="this.style.display='none'">
+                    <h3>Phone</h3>
+                    <p>+91 9296783086</p>
+                </a>
+
+                <!-- Email (Using Text Emoji to avoid SVGs, as no email image was provided) -->
+                <a href="mailto:lkstudiokatoriya@gmail.com" class="premium-card contact-card js-tilt">
+                    <div style="font-size: 4rem; margin-bottom: 1rem; transform: translateZ(30px);">✉️</div>
+                    <h3>Email</h3>
+                    <p>lkstudiokatoriya@gmail.com</p>
+                </a>
+
+                <!-- Location (Using Text Emoji to avoid SVGs) -->
+                <a href="https://maps.app.goo.gl/UuHgWaFdJS8n6qV48?g_st=ac" target="_blank" rel="noopener noreferrer" class="premium-card contact-card js-tilt">
+                    <div style="font-size: 4rem; margin-bottom: 1rem; transform: translateZ(30px);">📍</div>
+                    <h3>Location</h3>
+                    <p>Google Maps</p>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://youtube.com/@polytechnic_hub?si=8USwzlduGp-12RJL" target="_blank" rel="noopener noreferrer" class="premium-card contact-card js-tilt">
+                    <img src="logo.png" alt="YouTube - Polytechnic Hub" onerror="this.style.display='none'">
+                    <h3>YouTube</h3>
+                    <p>Polytechnic Hub</p>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/lk_lalan_bhai?igsh=Nnk3cXFpbDF1cDJs" target="_blank" rel="noopener noreferrer" class="premium-card contact-card js-tilt">
+                    <img src="instagram.jpeg" alt="Instagram" onerror="this.style.display='none'">
+                    <h3>Instagram</h3>
+                    <p>Follow our page</p>
+                </a>
+
+                <!-- Facebook (Ready for link later) -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="premium-card contact-card js-tilt">
+                    <img src="facebook.jpeg" alt="Facebook" onerror="this.style.display='none'">
+                    <h3>Facebook</h3>
+                    <p>Join our community</p>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://whatsapp.com/channel/0029VbBxDxX29759o9fc0B03" target="_blank" rel="noopener noreferrer" class="premium-card contact-card js-tilt">
+                    <img src="whatsapp.jpeg" alt="WhatsApp" onerror="this.style.display='none'">
+                    <h3>WhatsApp Channel</h3>
+                    <p>Get instant updates</p>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (No SVGs, strictly HTML text and local images) -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col footer-brand">
+                <img src="logo.png" alt="Polytechnic Hub Logo" class="logo-img" loading="lazy" onerror="this.style.display='none'">
+                <p>Empowering polytechnic students with top-tier free study materials, expert courses, and the latest updates.</p>
+                <a href="https://maps.app.goo.gl/UuHgWaFdJS8n6qV48?g_st=ac" target="_blank" rel="noopener noreferrer" style="display: flex; gap: 8px;">
+                    <span>📍</span> LK STUDY STUDIO MERHA BANKA BIHAR
+                </a>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>Phone: <br><a href="tel:+919296783086" style="color: var(--primary); font-weight:600;">+91 9296783086</a></p>
+                <p>Email: <br><a href="mailto:lkstudiokatoriya@gmail.com" style="color: var(--primary); font-weight:600;">lkstudiokatoriya@gmail.com</a></p>
+                <a href="https://whatsapp.com/channel/0029VbBxDxX29759o9fc0B03" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <img src="whatsapp.jpeg" alt="WhatsApp" style="width: 20px; height: 20px; border-radius: 4px;"> Join WhatsApp Channel
+                </a>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Legal & Social</h4>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+                <div class="footer-social-links">
+                    <a href="https://youtube.com/@polytechnic_hub?si=8USwzlduGp-12RJL" target="_blank" rel="noopener noreferrer" title="YouTube">
+                        <img src="logo.png" alt="YouTube" class="footer-social-img">
+                    </a>
+                    <a href="https://www.instagram.com/lk_lalan_bhai?igsh=Nnk3cXFpbDF1cDJs" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <img src="instagram.jpeg" alt="Instagram" class="footer-social-img">
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Facebook">
+                        <img src="facebook.jpeg" alt="Facebook" class="footer-social-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Polytechnic Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         JavaScript (Theme Toggle & 3D Tilt)
+         ========================================================================== -->
+    <script>
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        
+        function applyTheme() {
+            const isLight = localStorage.getItem('theme') === 'light';
+            if (isLight) {
+                document.body.classList.add('light-mode');
+                themeToggleBtn.innerText = '☀️';
+            } else {
+                document.body.classList.remove('light-mode');
+                themeToggleBtn.innerText = '🌙';
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'dark' : 'light');
+            applyTheme();
+        });
+
+        // --- 3D Tilt Effect ---
+        function applyTiltEffect() {
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const tiltCards = document.querySelectorAll('.js-tilt');
+                tiltCards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        // Subtle tilt calculations
+                        const rotateX = ((y - centerY) / centerY) * -5;
+                        const rotateY = ((x - centerX) / centerX) * 5;
+                        
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+                    });
+                });
+            }
+        }
+
+        // Initialize
+        applyTheme();
+        applyTiltEffect();
+    </script>
+</body>
+</html>
